@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.20.2",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.18.2",
+    "libraryName": "frv-intranet-2025-web-part",
+    "libraryId": "564200ed-bd8b-4fe4-9eac-c65a0931b987",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "FRV Intranet 2025 WebPart",
+    "solutionShortDescription": "FRV Intranet 2025 WebPart description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

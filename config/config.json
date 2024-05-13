@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "frv-intranet-2025-web-part-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/frvIntranet2025WebPart/FrvIntranet2025WebPartWebPart.js",
+          "manifest": "./src/webparts/frvIntranet2025WebPart/FrvIntranet2025WebPartWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "FrvIntranet2025WebPartWebPartStrings": "lib/webparts/frvIntranet2025WebPart/loc/{locale}.js"
+  }
+}

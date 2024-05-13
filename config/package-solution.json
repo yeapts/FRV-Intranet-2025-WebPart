@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "frv-intranet-2025-web-part-client-side-solution",
+    "id": "564200ed-bd8b-4fe4-9eac-c65a0931b987",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.18.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "FRV Intranet 2025 WebPart description"
+      },
+      "longDescription": {
+        "default": "FRV Intranet 2025 WebPart description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "frv-intranet-2025-web-part Feature",
+        "description": "The feature that activates elements of the frv-intranet-2025-web-part solution.",
+        "id": "2b077633-8ffc-4dc0-b5f6-312212895fd9",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/frv-intranet-2025-web-part.sppkg"
+  }
+}
