@@ -1,9 +1,9 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "frv-intranet-2025-web-part-client-side-solution",
+    "name": "FRV Intranet 2025 Web Part",
     "id": "564200ed-bd8b-4fe4-9eac-c65a0931b987",
-    "version": "1.0.0.0",
+    "version": "1.0.0.2",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -27,10 +27,10 @@
     },
     "features": [
       {
-        "title": "frv-intranet-2025-web-part Feature",
+        "title": "FRV Intranet 2025 WebPart",
         "description": "The feature that activates elements of the frv-intranet-2025-web-part solution.",
         "id": "2b077633-8ffc-4dc0-b5f6-312212895fd9",
-        "version": "1.0.0.0"
+        "version": "1.0.0.2"
       }
     ]
   },

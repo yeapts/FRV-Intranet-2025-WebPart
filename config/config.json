@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/frvIntranet2025WebPart/FrvIntranet2025WebPartWebPart.manifest.json"
         }
       ]
+    },
+    "frv-intranet-authors-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/frvIntranetAuthors/FrvIntranetAuthorsWebPart.js",
+          "manifest": "./src/webparts/frvIntranetAuthors/FrvIntranetAuthorsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "FrvIntranet2025WebPartWebPartStrings": "lib/webparts/frvIntranet2025WebPart/loc/{locale}.js"
+    "FrvIntranet2025WebPartWebPartStrings": "lib/webparts/frvIntranet2025WebPart/loc/{locale}.js",
+    "FrvIntranetAuthorsWebPartStrings": "lib/webparts/frvIntranetAuthors/loc/{locale}.js"
   }
 }

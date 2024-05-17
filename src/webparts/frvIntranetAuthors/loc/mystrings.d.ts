@@ -1,7 +1,7 @@
-declare interface IFrvIntranet2025WebPartWebPartStrings {
+declare interface IFrvIntranetAuthorsWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
-  TitleFieldLabel: string;
+  WebPartTitleFieldLabel: string;
   AppLocalEnvironmentSharePoint: string;
   AppLocalEnvironmentTeams: string;
   AppLocalEnvironmentOffice: string;
@@ -13,7 +13,7 @@ declare interface IFrvIntranet2025WebPartWebPartStrings {
   UnknownEnvironment: string;
 }
 
-declare module 'FrvIntranet2025WebPartWebPartStrings' {
-  const strings: IFrvIntranet2025WebPartWebPartStrings;
+declare module 'FrvIntranetAuthorsWebPartStrings' {
+  const strings: IFrvIntranetAuthorsWebPartStrings;
   export = strings;
 }

@@ -1,6 +1,9 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
-.frvIntranet2025WebPart {
+.section{
+  padding: 5px;
+}
+.frvIntranetAuthors {
   overflow: hidden;
   padding: 1em;
   color: "[theme:bodyText, default: #323130]";
@@ -12,12 +15,6 @@
 
 .welcome {
   text-align: center;
-  display: block;
-  position: fixed;
-  top: 72px;
-  right: 20px;
-  color: #ffffff;
-  z-index: 1;
 }
 
 .welcomeImage {
@@ -37,34 +34,4 @@
       color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
     }
   }
-}
-
-.helpToolbar{
-  display: block;
-  cursor: pointer;
-  position: fixed;
-  right: 19px;
-  bottom: 50px;  
-  .item{
-    padding:5px;  
-    text-align: center;
-    color: white;
-    background-color: #0c2340;  
-    border-color: rgb(255, 255, 255);
-    border-width: thin;
-    border-style: solid;
-    .icon
-    {
-      width: 100%;
-      max-width: 30px;
-    }
-  }
-}
-
-.message{
-  text-align: center;
-  display: block;
-  position: fixed;
-  bottom: 8px; 
-  color: white;
 }

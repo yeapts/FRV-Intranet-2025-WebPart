@@ -1,5 +1,5 @@
 export interface IFrvIntranet2025WebPartProps {
-  description: string;
+  title: string;
   isDarkTheme: boolean;
   environmentMessage: string;
   hasTeamsContext: boolean;

@@ -8,24 +8,32 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-import * as strings from 'FrvIntranet2025WebPartWebPartStrings';
-import FrvIntranet2025WebPart from './components/FrvIntranet2025WebPart';
-import { IFrvIntranet2025WebPartProps } from './components/IFrvIntranet2025WebPartProps';
-
-export interface IFrvIntranet2025WebPartWebPartProps {
-  title: string;
+import * as strings from 'FrvIntranetAuthorsWebPartStrings';
+import FrvIntranetAuthors from './components/FrvIntranetAuthors';
+import { IFrvIntranetAuthorsProps } from './components/IFrvIntranetAuthorsProps';
+import { SPPermission } from '@microsoft/sp-page-context';
+export interface IFrvIntranetAuthorsWebPartProps {
+  webparttitle: string;
 }
 
-export default class FrvIntranet2025WebPartWebPart extends BaseClientSideWebPart<IFrvIntranet2025WebPartWebPartProps> {
+export default class FrvIntranetAuthorsWebPart extends BaseClientSideWebPart<IFrvIntranetAuthorsWebPartProps> {
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
+  private _isEditor: boolean = false;
 
   public render(): void {
-    const element: React.ReactElement<IFrvIntranet2025WebPartProps> = React.createElement(
-      FrvIntranet2025WebPart,
+
+    this._isEditor = this.checkEditorPermission();
+    console.log(`Editor: ${this._isEditor}`);
+
+    const element: React.ReactElement<IFrvIntranetAuthorsProps> = React.createElement(
+      FrvIntranetAuthors,
       {
-        title: this.properties.title,
+        webpartTitle: this.properties.webparttitle,
+        absoluteUrl: this.context.pageContext.web.absoluteUrl,
+        spHttpClient:this.context.spHttpClient,
+        isEditor: this._isEditor,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
@@ -42,7 +50,12 @@ export default class FrvIntranet2025WebPartWebPart extends BaseClientSideWebPart
     });
   }
 
-
+  private checkEditorPermission = ():boolean => {
+    //Editor group can add item on list/library via addListItems permission
+    const permission = new SPPermission(this.context.pageContext.web.permissions.value);
+    const isMemberPermission = permission.hasPermission(SPPermission.addListItems);
+    return isMemberPermission;
+  }
 
   private _getEnvironmentMessage(): Promise<string> {
     if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
@@ -108,8 +121,8 @@ export default class FrvIntranet2025WebPartWebPart extends BaseClientSideWebPart
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('title', {
-                  label: strings.TitleFieldLabel
+                PropertyPaneTextField('webparttitle', {
+                  label: strings.WebPartTitleFieldLabel
                 })
               ]
             }
