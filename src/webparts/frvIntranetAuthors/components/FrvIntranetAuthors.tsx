@@ -38,8 +38,27 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
         (error: Error) => { console.log({ status: 'Loading failed: ' + error, items: [] }); }
       );
   };
+  const handleScrollBehavior = ():void => {
+    window.onload = () => {
+      window.onscroll = () => {
+        const headerElement = document.getElementById("logo");
+        console.log("Scrolling");
+        if (headerElement) {
+          if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            headerElement.style.fontSize = "30px";
+            console.log("font 30");
+          } else {
+            headerElement.style.fontSize = "90px";
+            console.log("font 90");
+          }
+        }
+      };
+    };
+  };
+  React.useEffect(() => { readAllItem(); handleScrollBehavior(); }, []);
 
-  React.useEffect(() => { readAllItem(); }, []);
+
+
 
   const { webpartTitle, isEditor } = props;
 
