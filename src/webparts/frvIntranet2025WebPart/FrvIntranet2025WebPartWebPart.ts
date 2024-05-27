@@ -33,7 +33,7 @@ export default class FrvIntranet2025WebPartWebPart extends BaseClientSideWebPart
       }
     );
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(element , this.domElement);
   }
 
   protected onInit(): Promise<void> {

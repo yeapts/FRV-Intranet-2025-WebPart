@@ -35,30 +35,32 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
             setState({ status: 'Latest items loaded', items: response.value });
           }
         },
-        (error: Error) => { console.log({ status: 'Loading failed: ' + error, items: [] }); }
+        (error: Error) => { console.log({ status: 'Loading failed: ' + error, items: [] });  }
       );
   };
-  const handleScrollBehavior = ():void => {
-    window.onload = () => {
-      window.onscroll = () => {
-        const headerElement = document.getElementById("logo");
-        console.log("Scrolling");
-        if (headerElement) {
-          if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-            headerElement.style.fontSize = "30px";
-            console.log("font 30");
-          } else {
-            headerElement.style.fontSize = "90px";
-            console.log("font 90");
-          }
-        }
-      };
-    };
-  };
-  React.useEffect(() => { readAllItem(); handleScrollBehavior(); }, []);
+  React.useEffect(() => { readAllItem(); }, []);
 
-
-
+  const DeleteItem = (itemId:string): void => {
+    console.log (`Deleting... ${itemId}`);
+    props.spHttpClient
+    .post(`${props.absoluteUrl}/_api/Web/SiteGroups/GetById(5)/Users/removeById(${itemId})`,SPHttpClient.configurations.v1,
+    {headers: {
+      'Accept': 'application/json;odata=nometadata',
+      'Content-type': 'application/json;odata=verbose',
+      'odata-version': '',
+      'IF-MATCH': "*",
+      'X-HTTP-Method': 'DELETE'
+    }})
+    .then((response: SPHttpClientResponse): void => {
+      console.log(`Item with ID: ${itemId} successfully deleted`);
+      setState({ status: 'successfuly deleted', items: [] });
+      readAllItem();
+    }, (error: Error): void => {
+      console.log(`Error deleting item: ${error}`);
+      setState({ status: 'error deleting', items: [] });
+    });
+    console.log (`Deleted... ${itemId}`);
+  }
 
   const { webpartTitle, isEditor } = props;
 
@@ -73,7 +75,7 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
           <ul>
             {state.items.map((item) => (
               <li key={item.Id}>
-                {escape(item.Title)}
+                {escape(item.Title)}  <a onClick={() => DeleteItem(item.Id)} >Delete</a>
               </li>
             ))}
           </ul>

@@ -1,13 +1,9 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  type IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-property-pane';
+import { type IPropertyPaneConfiguration, PropertyPaneTextField } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
-
 import * as strings from 'FrvIntranetAuthorsWebPartStrings';
 import FrvIntranetAuthors from './components/FrvIntranetAuthors';
 import { IFrvIntranetAuthorsProps } from './components/IFrvIntranetAuthorsProps';
@@ -131,4 +127,5 @@ export default class FrvIntranetAuthorsWebPart extends BaseClientSideWebPart<IFr
       ]
     };
   }
+
 }
