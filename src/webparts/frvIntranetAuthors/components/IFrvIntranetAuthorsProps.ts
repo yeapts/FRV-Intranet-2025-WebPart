@@ -1,4 +1,8 @@
+import { WebPartContext } from "@microsoft/sp-webpart-base";
+import { AppMode } from "../FrvIntranetAuthorsWebPart";
 import { SPHttpClient } from '@microsoft/sp-http';
+import { IReadonlyTheme } from '@microsoft/sp-component-base';
+
 export interface IFrvIntranetAuthorsProps {
   webpartTitle: string;
   absoluteUrl: string;
@@ -8,4 +12,7 @@ export interface IFrvIntranetAuthorsProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  context: WebPartContext;
+  appMode: AppMode;
+  themeVariant: IReadonlyTheme | undefined;
 }
