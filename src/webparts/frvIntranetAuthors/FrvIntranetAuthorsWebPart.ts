@@ -8,9 +8,9 @@ import * as strings from 'FrvIntranetAuthorsWebPartStrings';
 import FrvIntranetAuthors from './components/FrvIntranetAuthors';
 import { IFrvIntranetAuthorsProps } from './components/IFrvIntranetAuthorsProps';
 import { SPPermission } from '@microsoft/sp-page-context';
-import { FluentProvider, FluentProviderProps, teamsDarkTheme, teamsLightTheme, webLightTheme, webDarkTheme, Theme } from '@fluentui/react-components';
-import { createV9Theme } from "@fluentui/react-migration-v8-v9";
-import { Theme as ThemeV8 } from '@fluentui/theme';
+import { FluentProvider, FluentProviderProps, webLightTheme, Theme} from '@fluentui/react-components';
+
+
 export enum AppMode {
   SharePoint, SharePointLocal, Teams, TeamsLocal, Office, OfficeLocal, Outlook, OutlookLocal
 }
@@ -26,7 +26,7 @@ export default class FrvIntranetAuthorsWebPart extends BaseClientSideWebPart<IFr
   private _isEditor: boolean = false;
 
   private _appMode: AppMode = AppMode.SharePoint;
-  private _theme: Theme = webLightTheme;
+
 
   private _themeProvider: ThemeProvider;
   private _themeVariant: IReadonlyTheme | undefined;
@@ -77,23 +77,23 @@ export default class FrvIntranetAuthorsWebPart extends BaseClientSideWebPart<IFr
       }
     );
 
+    const customLightTheme: Theme = {
+      ...webLightTheme,
+      colorBrandBackground: '#0c2340', // overriden token
+      colorCompoundBrandStroke: '#0c2340', // overriden token
+      colorNeutralBackground1: '#ffffff00',
+    };    
+
     //wrap the component with the Fluent UI 9 Provider.
     const fluentElement: React.ReactElement<FluentProviderProps> = React.createElement(
       FluentProvider,
       {
-        theme: this._appMode === AppMode.Teams || this._appMode === AppMode.TeamsLocal ?
-          this._isDarkTheme ? teamsDarkTheme : teamsLightTheme :
-          this._appMode === AppMode.SharePoint || this._appMode === AppMode.SharePointLocal ?
-            this._isDarkTheme ? webDarkTheme : this._theme :
-            this._isDarkTheme ? webDarkTheme : webLightTheme
+        theme: customLightTheme
       },
       element
     );
-
     ReactDom.render(fluentElement, this.domElement);
   }
-
-
 
   private checkEditorPermission = ():boolean => {
     //Editor group can add item on list/library via addListItems permission
@@ -117,10 +117,7 @@ export default class FrvIntranetAuthorsWebPart extends BaseClientSideWebPart<IFr
     if (!currentTheme) { return; }
     this._isDarkTheme = !!currentTheme.isInverted;
 
-    //if the app mode is sharepoint, adjust the fluent ui 9 web light theme to use the sharepoint theme color, teams/dark mode should be fine on default
-    if (this._appMode === AppMode.SharePoint || this._appMode === AppMode.SharePointLocal) {
-      this._theme = createV9Theme(currentTheme as ThemeV8, webLightTheme);
-    }
+
     
     const { semanticColors } = currentTheme;
 
