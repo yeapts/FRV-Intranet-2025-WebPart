@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "947373c1-d958-44fc-a968-b03d2a799f3f",
-  "alias": "FrvIntranet2025WebPartWebPart",
+  "id": "0399d622-3250-4b12-83f4-133919d36560",
+  "alias": "FrvIntranetContactsWebPart",
   "componentType": "WebPart",
   "version": "*",
   "manifestVersion": 2,
@@ -9,13 +9,13 @@
   "supportedHosts": ["SharePointWebPart"],
   "supportsThemeVariants": true,
   "preconfiguredEntries": [{
-    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", 
     "group": { "default": "Advanced" },
-    "title": { "default": "FRV Intranet 2025 WebPart" },
-    "description": { "default": "FRV Intranet 2025 WebPart description" },
+    "title": { "default": "FRV Intranet Contacts" },
+    "description": { "default": "FRV Intranet Contacts description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "FRV Intranet 2025 WebPart"
+      "description": "FRV Intranet Contacts"
     }
   }]
 }

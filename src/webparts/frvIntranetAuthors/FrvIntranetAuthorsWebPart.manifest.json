@@ -22,7 +22,8 @@
     "description": { "default": "FRV Intranet Authors description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "webparttitle": "Intranet Authors"
+      "webparttitle": "Intranet Authors",
+      "sharepointGroupID": "5"
     }
   }]
 }

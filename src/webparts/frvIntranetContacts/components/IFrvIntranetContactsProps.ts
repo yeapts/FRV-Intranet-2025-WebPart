@@ -1,9 +1,9 @@
 import { WebPartContext } from "@microsoft/sp-webpart-base";
-import { AppMode } from "../FrvIntranetAuthorsWebPart";
+
 import { SPHttpClient } from '@microsoft/sp-http';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-export interface IFrvIntranetAuthorsProps {
+export interface IFrvIntranetContactsProps {
   webpartTitle: string;
   absoluteUrl: string;
   spHttpClient: SPHttpClient; 
@@ -13,7 +13,5 @@ export interface IFrvIntranetAuthorsProps {
   hasTeamsContext: boolean;
   userDisplayName: string;
   context: WebPartContext;
-  appMode: AppMode;
   themeVariant: IReadonlyTheme | undefined;
-  sharepointGroupID: number;
 }

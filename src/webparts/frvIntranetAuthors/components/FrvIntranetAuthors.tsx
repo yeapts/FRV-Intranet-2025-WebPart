@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './FrvIntranetAuthors.module.scss';
 import { SPHttpClient } from '@microsoft/sp-http';
-import { IListItem } from './IListItem'; // Assuming IListItem is defined in this file
+import { IState } from './IState'; 
 import { IFrvIntranetAuthorsProps } from './IFrvIntranetAuthorsProps';
 import { makeStyles, Button ,  Dialog, shorthands,
   DialogTrigger,
@@ -12,10 +12,7 @@ import { makeStyles, Button ,  Dialog, shorthands,
   DialogContent, Input, Field} from '@fluentui/react-components';
 import { PersonEditRegular, AddRegular} from "@fluentui/react-icons";
 
-interface IState {
-  items: IListItem[];
-  status: string;
-}
+
 
 const useStyles = makeStyles({
   webpartStyle:{
@@ -94,7 +91,7 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
   const readAllItem = async (): Promise<void> => {
     try {
       setState({ status: 'Loading all items...', items: [] });
-      const response = await props.spHttpClient.get(`${props.absoluteUrl}/_api/web/SiteGroups/GetById(5)/Users`,SPHttpClient.configurations.v1,{headers:{Accept:'application/json;odata=nometadata','odata-version':'',},});
+      const response = await props.spHttpClient.get(`${props.absoluteUrl}/_api/web/SiteGroups/GetById(${props.sharepointGroupID})/Users`,SPHttpClient.configurations.v1,{headers:{Accept:'application/json;odata=nometadata','odata-version':'',},});
       const data = await response.json();
       setState({ status: 'Items loaded', items: data?.value ?? [] });
     } catch (error) {
@@ -107,7 +104,7 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
   const DeleteItem = async (itemId:string): Promise<void> => {
     try {
       console.log (`Deleting... ${itemId}`);
-      await props.spHttpClient.post(`${props.absoluteUrl}/_api/Web/SiteGroups/GetById(5)/Users/removeById(${itemId})`,SPHttpClient.configurations.v1,
+      await props.spHttpClient.post(`${props.absoluteUrl}/_api/Web/SiteGroups/GetById(${props.sharepointGroupID})/Users/removeById(${itemId})`,SPHttpClient.configurations.v1,
       {headers: {
         'X-HTTP-Method': 'DELETE'
       }});
@@ -129,7 +126,7 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
     try {
       console.log (`adding... ${inputEmail} - value: ${inputEmailValue}`);
       const body: string = JSON.stringify({ 'LoginName': `i:0#.f|membership|${inputEmailValue}`, }); 
-      await props.spHttpClient.post(`${props.absoluteUrl}/_api/Web/SiteGroups/GetById(5)/Users`,SPHttpClient.configurations.v1,
+      await props.spHttpClient.post(`${props.absoluteUrl}/_api/Web/SiteGroups/GetById(${props.sharepointGroupID})/Users`,SPHttpClient.configurations.v1,
       {headers: {
         'Accept': 'application/json;odata=nometadata',
         'Content-type': 'application/json;odata=nometadata',
@@ -159,14 +156,14 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
         <h3>{(webpartTitle)}</h3>
         <div>
           <div className={classes.listAction}>
-            <Button shape="square" size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Author</Button>
+            <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Author</Button>
           </div>
           <div>
             {state.items.map((item) => (
               <div key={item.Id} className={classes.list}>
                 <div className={classes.itemIcon}><PersonEditRegular /></div>
                 <div className={classes.itemTitle}>{(item.Title)} </div>
-                <div className={classes.itemAction}><Button shape="square" className={classes.button} onClick={handleDelete(DeleteItem, item.Id)}>Remove</Button> </div>
+                <div className={classes.itemAction}><Button size="small" className={classes.button} onClick={handleDelete(DeleteItem, item.Id)}>Remove</Button> </div>
               </div>
             ))}
           </div>
