@@ -8,8 +8,6 @@ import * as strings from 'FrvIntranetAuthorsWebPartStrings';
 import FrvIntranetAuthors from './components/FrvIntranetAuthors';
 import { IFrvIntranetAuthorsProps } from './components/IFrvIntranetAuthorsProps';
 import { SPPermission } from '@microsoft/sp-page-context';
-import { FluentProvider, FluentProviderProps, webLightTheme, Theme} from '@fluentui/react-components';
-
 
 export enum AppMode {
   SharePoint, SharePointLocal, Teams, TeamsLocal, Office, OfficeLocal, Outlook, OutlookLocal
@@ -79,22 +77,7 @@ export default class FrvIntranetAuthorsWebPart extends BaseClientSideWebPart<IFr
       }
     );
 
-    const customLightTheme: Theme = {
-      ...webLightTheme,
-      colorBrandBackground: '#0c2340', // overriden token
-      colorCompoundBrandStroke: '#0c2340', // overriden token
-      colorNeutralBackground1: '#ffffff00',
-    };    
-
-    //wrap the component with the Fluent UI 9 Provider.
-    const fluentElement: React.ReactElement<FluentProviderProps> = React.createElement(
-      FluentProvider,
-      {
-        theme: customLightTheme
-      },
-      element
-    );
-    ReactDom.render(fluentElement, this.domElement);
+    ReactDom.render(element, this.domElement);
   }
 
   private checkEditorPermission = ():boolean => {

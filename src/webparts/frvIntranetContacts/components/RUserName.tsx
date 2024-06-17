@@ -1,22 +1,30 @@
+import {FluentProvider, Subtitle2Stronger} from "@fluentui/react-components";
+import { useStyles } from './Styles';
 import * as React from "react";
+import { customLightTheme } from "./Theme";
 
 interface Props {
-    username: string | undefined;
-    nametitle: string;
+  username: string | undefined;
+  nametitle: string;
   }
-  
+
   const UserName = ({ username, nametitle }: Props): JSX.Element => {
-    if (username !== null) {
+    const classes = useStyles ();
+    if (username) {
       return (
-        <span>
-          {username}
+        <FluentProvider theme={customLightTheme}> 
+        <span >
+            <Subtitle2Stronger className={classes.textStyle} truncate wrap={false}>{username}</Subtitle2Stronger> 
         </span>
+        </FluentProvider>
       );
     } else {
       return (
-        <span>
-          {nametitle}
+        <FluentProvider theme={customLightTheme}> 
+        <span >
+            <Subtitle2Stronger className={classes.textStyle} truncate wrap={false}>{nametitle}</Subtitle2Stronger> 
         </span>
+        </FluentProvider>
       );
     }
   };

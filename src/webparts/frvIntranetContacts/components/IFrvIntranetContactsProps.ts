@@ -1,5 +1,5 @@
 import { WebPartContext } from "@microsoft/sp-webpart-base";
-
+import { AppMode } from "../FrvIntranetContactsWebPart";
 import { SPHttpClient } from '@microsoft/sp-http';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
@@ -14,4 +14,5 @@ export interface IFrvIntranetContactsProps {
   userDisplayName: string;
   context: WebPartContext;
   themeVariant: IReadonlyTheme | undefined;
+  appMode: AppMode;
 }

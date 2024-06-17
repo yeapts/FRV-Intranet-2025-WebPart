@@ -1,4 +1,7 @@
 import * as React from "react";
+import { Text,  FluentProvider } from "@fluentui/react-components";
+import { useStyles } from './Styles';
+import { customLightTheme } from './Theme';
 
 interface Props {
     usertitle: string | undefined;
@@ -6,17 +9,22 @@ interface Props {
   }
   
   const UserTitle = ({ usertitle, nametitle }: Props): JSX.Element => {
+    const classes = useStyles();
     if (usertitle !== null) {
       return (
+        <FluentProvider theme={customLightTheme}> 
         <span>
-          {usertitle}
+        <Text className={classes.textStyle} truncate wrap={false}>{usertitle}</Text>   
         </span>
+        </FluentProvider>
       );
     } else {
       return (
+        <FluentProvider theme={customLightTheme}>  
         <span>
-          {nametitle}
+        <Text className={classes.textStyle} truncate wrap={false}>{nametitle}</Text> 
         </span>
+        </FluentProvider>
       );
     }
   };

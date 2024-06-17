@@ -11,7 +11,11 @@ import FrvIntranetContacts from './components/FrvIntranetContacts';
 import { IFrvIntranetContactsProps } from './components/IFrvIntranetContactsProps';
 import { ThemeProvider, ThemeChangedEventArgs, IReadonlyTheme } from '@microsoft/sp-component-base';
 import { SPPermission } from '@microsoft/sp-page-context';
-import { FluentProvider, FluentProviderProps, webLightTheme, Theme} from '@fluentui/react-components';
+//import { FluentProvider, FluentProviderProps, webLightTheme, Theme} from '@fluentui/react-components';
+
+export enum AppMode {
+  SharePoint, SharePointLocal, Teams, TeamsLocal, Office, OfficeLocal, Outlook, OutlookLocal
+}
 
 export interface IFrvIntranetContactsWebPartProps {
   webparttitle: string;
@@ -25,6 +29,7 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
   private _isEditor: boolean = false;
   private _themeProvider: ThemeProvider;
   private _themeVariant: IReadonlyTheme | undefined;
+  private _appMode: AppMode = AppMode.SharePoint;
 
   public render(): void {
 
@@ -41,27 +46,29 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
+        appMode: this._appMode,
         context: this.context,
         themeVariant: this._themeVariant,
       }
     );
 
-    const customLightTheme: Theme = {
-      ...webLightTheme,
-      colorBrandBackground: '#0c2340', // overriden token
-      colorCompoundBrandStroke: '#0c2340', // overriden token
-      colorNeutralBackground1: '#ffffff00',
-    };    
+    //const customLightTheme: Theme = {
+    //  ...webLightTheme,
+    //  colorBrandBackground: '#0c2340', // overriden token
+    //  colorCompoundBrandStroke: '#0c2340', // overriden token
+    //  colorNeutralBackground1: '#ffffff00',
+    //  colorNeutralForeground1: '#ffffff00',
+    //};    
 
     //wrap the component with the Fluent UI 9 Provider.
-    const fluentElement: React.ReactElement<FluentProviderProps> = React.createElement(
-      FluentProvider,
-      {
-        theme: customLightTheme
-      },
-      element
-    );
-    ReactDom.render(fluentElement, this.domElement);
+    //const fluentElement: React.ReactElement<FluentProviderProps> = React.createElement(
+    //  FluentProvider,
+    //  {
+    //    theme: customLightTheme
+    //  },
+    //  element
+    //);
+    ReactDom.render(element, this.domElement);
   }
 
   private checkEditorPermission = ():boolean => {
@@ -81,7 +88,18 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
     this.render();
   }
 
-  protected onInit(): Promise<void> {
+  protected async onInit(): Promise<void> {
+    const _l = this.context.isServedFromLocalhost;
+    if (!!this.context.sdks.microsoftTeams) {
+      const teamsContext = await this.context.sdks.microsoftTeams.teamsJs.app.getContext();
+      switch (teamsContext.app.host.name.toLowerCase()) {
+        case 'teams': this._appMode = _l ? AppMode.TeamsLocal : AppMode.Teams; break;
+        case 'office': this._appMode = _l ? AppMode.OfficeLocal : AppMode.Office; break;
+        case 'outlook': this._appMode = _l ? AppMode.OutlookLocal : AppMode.Outlook; break;
+        default: throw new Error('Unknown host');
+      }
+    } else this._appMode = _l ? AppMode.SharePointLocal : AppMode.SharePoint;
+
     // Consume the new ThemeProvider service
     this._themeProvider = this.context.serviceScope.consume(ThemeProvider.serviceKey);
 
@@ -95,21 +113,16 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
-    if (!currentTheme) {
-      return;
-    }
-
+    if (!currentTheme) { return; }
     this._isDarkTheme = !!currentTheme.isInverted;
-    const {
-      semanticColors
-    } = currentTheme;
-
+    console.log(this._isDarkTheme);
+    const {semanticColors} = currentTheme;
     if (semanticColors) {
       this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
       this.domElement.style.setProperty('--link', semanticColors.link || null);
+      this.domElement.style.setProperty('--bodyBackground', semanticColors.bodyBackground || null);
       this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
     }
-
   }
 
   protected onDispose(): void {
@@ -131,7 +144,7 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
+                PropertyPaneTextField('webparttitle', {
                   label: strings.DescriptionFieldLabel
                 })
               ]

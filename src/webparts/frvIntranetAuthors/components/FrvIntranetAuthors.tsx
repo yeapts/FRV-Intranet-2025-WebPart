@@ -3,64 +3,17 @@ import styles from './FrvIntranetAuthors.module.scss';
 import { SPHttpClient } from '@microsoft/sp-http';
 import { IState } from './IState'; 
 import { IFrvIntranetAuthorsProps } from './IFrvIntranetAuthorsProps';
-import { makeStyles, Button ,  Dialog, shorthands,
+import {  Button ,  Dialog, 
   DialogTrigger,
   DialogSurface,
   DialogTitle,
   DialogBody,
   DialogActions,
-  DialogContent, Input, Field} from '@fluentui/react-components';
+  DialogContent, Input, Field,
+  FluentProvider, Text} from '@fluentui/react-components';
 import { PersonEditRegular, AddRegular} from "@fluentui/react-icons";
-
-
-
-const useStyles = makeStyles({
-  webpartStyle:{
-    //backgroundColor: 'var(--bodyBackground)',
-    color: 'var(--bodyText)',
-  },
-  button:{
-    backgroundColor: 'var(--bodyBackground)',
-    color: 'var(--bodyText)',
-    minWidth: 'fit-content',
-  },
-  listAction:{
-    marginBlockEnd: '1em',
-  },
-  itemTitle:{
-    flexGrow: 8,
-    textAlign: 'left',
-    alignContent: 'center',
-  },
-  itemIcon:{
-    alignContent: 'center',
-    paddingRight: '0.25em',
-  },
-  itemAction:{
-    alignContent: 'center',
-    textAlign: 'right',
-  },
-  list:{
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-  },
-  dialogSurface: {
-    backgroundColor: 'white',
-  },
-  dialogContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    ...shorthands.gap("2px"),
-    backgroundColor: 'white !important',
-    color: 'black',
-    Width: '100%',
-  },
-  inputField: {
-    backgroundColor: 'white !important',
-    color: 'black !important',
-  }
-});
+import { useStyles } from './Styles';
+import { customLightTheme } from './Theme';
 
 const handleDelete = (DeleteItem: (id: string) => Promise<void>, id: string): () => Promise<void> => async () => {
   await DeleteItem(id);
@@ -153,7 +106,8 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
     return (
       <div className={classes.webpartStyle}>
       <section className={styles.section}>
-        <h3>{(webpartTitle)}</h3>
+      <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>   
+        <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
         <div>
           <div className={classes.listAction}>
             <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Author</Button>
@@ -161,8 +115,9 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
           <div>
             {state.items.map((item) => (
               <div key={item.Id} className={classes.list}>
-                <div className={classes.itemIcon}><PersonEditRegular /></div>
-                <div className={classes.itemTitle}>{(item.Title)} </div>
+                <div><PersonEditRegular className={classes.itemIcon} /></div>
+                <div><Text className={classes.textStyle} truncate wrap={false}>{item.Title}</Text>
+                </div>
                 <div className={classes.itemAction}><Button size="small" className={classes.button} onClick={handleDelete(DeleteItem, item.Id)}>Remove</Button> </div>
               </div>
             ))}
@@ -207,21 +162,24 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
                   </DialogSurface>
                 </div>
               </Dialog>
+      </FluentProvider>        
       </section>
       </div>
     );
   } else {
     return (
       <section className={styles.section}>
-        <h3>{(webpartTitle)}</h3>
+      <FluentProvider theme={customLightTheme}  className={classes.fluentProvider}>   
+        <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
         <div>
             {state.items.map((item) => (
               <div key={item.Id} className={classes.list}>
-                <div className={classes.itemIcon}><PersonEditRegular /></div>
-                <div className={classes.itemTitle}>{(item.Title)} </div>
+                <div><PersonEditRegular className={classes.itemIcon} /></div>
+                <div><Text className={classes.textStyle} truncate wrap={false}>{item.Title}</Text></div>
               </div>
             ))}
         </div>
+      </FluentProvider>     
       </section>
     );
   }

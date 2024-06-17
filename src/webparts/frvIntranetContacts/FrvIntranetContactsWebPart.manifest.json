@@ -15,7 +15,7 @@
     "description": { "default": "FRV Intranet Contacts description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "FRV Intranet Contacts"
+      "webparttitle": "Contacts"
     }
   }]
 }
