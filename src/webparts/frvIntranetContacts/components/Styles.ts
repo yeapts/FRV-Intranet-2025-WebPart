@@ -9,6 +9,9 @@ export const useStyles = makeStyles({
     //backgroundColor: 'var(--bodyBackground)',
     color: 'var(--bodyText)',
   },
+  fluentProvider:{
+    backgroundColor: 'var(--bodyBackground)',
+  },
   toolTip:{
     backgroundColor: "white",
   }  ,

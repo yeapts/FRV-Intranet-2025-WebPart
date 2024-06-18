@@ -12,8 +12,9 @@ import UserQuickdial from './RUserQuickdial';
 import UserEmail from './RUserEmail';
 import { useStyles } from './Styles';
 import { customLightTheme } from './Theme';
-import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, Input } from '@fluentui/react-components';
+import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, Input} from '@fluentui/react-components';
 import { AddRegular} from "@fluentui/react-icons";
+//import { Theme } from '@fluentui/react';
 
 const handleDelete = (DeleteItem: (id: number) => Promise<void>, id: number): () => Promise<void> => async () => {
   await DeleteItem(id);
@@ -29,8 +30,6 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { webpartTitle, isEditor } = props;
   const classes = useStyles ();
-
- 
 
   const handleOpenAddDialog = ():void => {
     setAddDialogIsOpen(true);
@@ -162,12 +161,14 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
     readAllItems().catch(handleError);
   }, []);
 
+ // const currentTheme = props.isDarkTheme ? webDarkTheme : webLightTheme;
+
   if (isEditor === true) 
     {
       return (
         <div className={classes.webpartStyle}>
         <section className={styles.section}>
-        <FluentProvider theme={customLightTheme}>
+        <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>  
           <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
           <div className={classes.listAction}>
             <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Author</Button>
@@ -233,7 +234,7 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
       return (
         <div className={classes.webpartStyle}>
         <section className={styles.section}>
-        <FluentProvider theme={customLightTheme}> 
+        <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>  
           <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
           <div>
             {state.items.map((item) => (
