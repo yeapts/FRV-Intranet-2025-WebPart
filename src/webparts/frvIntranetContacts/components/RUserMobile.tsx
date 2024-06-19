@@ -1,4 +1,4 @@
-import { Tooltip, Text,  FluentProvider } from "@fluentui/react-components";
+import { Tooltip, Text,   } from "@fluentui/react-components";
 import { ViewDesktopMobile24Filled} from "@fluentui/react-icons";
 import { useStyles } from './Styles';
 import * as React from "react";
@@ -12,7 +12,7 @@ interface Props {
     const classes = useStyles();
     if (usermobile) {
       return (
-        <FluentProvider>
+
         <span >
           <Tooltip withArrow appearance="inverted" positioning="above-start" content="Mobile Phone" relationship="label">
             <ViewDesktopMobile24Filled className={classes.contactIcon} />        
@@ -21,7 +21,7 @@ interface Props {
             <Text className={classes.textStyle} truncate wrap={false}>{usermobile}</Text> 
           </Tooltip> 
         </span>
-        </FluentProvider>
+
       );
     } else {
       return (

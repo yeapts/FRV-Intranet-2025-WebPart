@@ -9,13 +9,11 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'FrvIntranetContactsWebPartStrings';
 import FrvIntranetContacts from './components/FrvIntranetContacts';
 import { IFrvIntranetContactsProps } from './components/IFrvIntranetContactsProps';
-import { ThemeProvider, ThemeChangedEventArgs, IReadonlyTheme } from '@microsoft/sp-component-base';
+//import {   IReadonlyTheme } from '@microsoft/sp-component-base';
 import { SPPermission } from '@microsoft/sp-page-context';
-//import { FluentProvider, FluentProviderProps, webLightTheme, Theme} from '@fluentui/react-components';
+//import { FluentProvider, FluentProviderProps,    webDarkTheme, webLightTheme } from '@fluentui/react-components';
+import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-export enum AppMode {
-  SharePoint, SharePointLocal, Teams, TeamsLocal, Office, OfficeLocal, Outlook, OutlookLocal
-}
 
 export interface IFrvIntranetContactsWebPartProps {
   webparttitle: string;
@@ -27,9 +25,10 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
   private _isEditor: boolean = false;
-  private _themeProvider: ThemeProvider;
-  private _themeVariant: IReadonlyTheme | undefined;
-  private _appMode: AppMode = AppMode.SharePoint;
+
+  //private _themeProvider: ThemeProvider;
+ // private _themeVariant: IReadonlyTheme | undefined;
+  //private _appMode: AppMode = AppMode.SharePoint;
 
   public render(): void {
 
@@ -46,28 +45,13 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        appMode: this._appMode,
+        instanceId: this.context.instanceId,
+        //appMode: this._appMode,
         context: this.context,
-        themeVariant: this._themeVariant,
+       // themeVariant: this._themeVariant,
       }
     );
 
-    //const customLightTheme: Theme = {
-    //  ...webLightTheme,
-    //  colorBrandBackground: '#0c2340', // overriden token
-    //  colorCompoundBrandStroke: '#0c2340', // overriden token
-    //  colorNeutralBackground1: '#ffffff00',
-    //  colorNeutralForeground1: '#ffffff00',
-    //};    
-
-    //wrap the component with the Fluent UI 9 Provider.
-    //const fluentElement: React.ReactElement<FluentProviderProps> = React.createElement(
-    //  FluentProvider,
-    //  {
-    //    theme: customLightTheme
-    //  },
-    //  element
-    //);
     ReactDom.render(element, this.domElement);
   }
 
@@ -83,31 +67,21 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
    *
    * @param args The new theme
    */
-  private _handleThemeChangedEvent(args: ThemeChangedEventArgs): void {
-    this._themeVariant = args.theme;
-    this.render();
-  }
+  //private _handleThemeChangedEvent(args: ThemeChangedEventArgs): void {
+  //  this._themeVariant = args.theme;
+  //  this.render();
+  //}
 
   protected async onInit(): Promise<void> {
-    const _l = this.context.isServedFromLocalhost;
-    if (!!this.context.sdks.microsoftTeams) {
-      const teamsContext = await this.context.sdks.microsoftTeams.teamsJs.app.getContext();
-      switch (teamsContext.app.host.name.toLowerCase()) {
-        case 'teams': this._appMode = _l ? AppMode.TeamsLocal : AppMode.Teams; break;
-        case 'office': this._appMode = _l ? AppMode.OfficeLocal : AppMode.Office; break;
-        case 'outlook': this._appMode = _l ? AppMode.OutlookLocal : AppMode.Outlook; break;
-        default: throw new Error('Unknown host');
-      }
-    } else this._appMode = _l ? AppMode.SharePointLocal : AppMode.SharePoint;
 
     // Consume the new ThemeProvider service
-    this._themeProvider = this.context.serviceScope.consume(ThemeProvider.serviceKey);
+    //this._themeProvider = this.context.serviceScope.consume(ThemeProvider.serviceKey);
 
     // If it exists, get the theme variant
-    this._themeVariant = this._themeProvider.tryGetTheme();
+    //this._themeVariant = this._themeProvider.tryGetTheme();
 
     // Register a handler to be notified if the theme variant changes
-    this._themeProvider.themeChangedEvent.add(this, this._handleThemeChangedEvent);
+    //this._themeProvider.themeChangedEvent.add(this, this._handleThemeChangedEvent);
 
     return super.onInit();
   }
@@ -115,13 +89,14 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
     if (!currentTheme) { return; }
     this._isDarkTheme = !!currentTheme.isInverted;
-    console.log(this._isDarkTheme);
+    
+   // this._theme = createV9Theme(currentTheme as undefined, webLightTheme);
     const {semanticColors} = currentTheme;
     if (semanticColors) {
-      this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
-      this.domElement.style.setProperty('--link', semanticColors.link || null);
+  //    this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
+  //    this.domElement.style.setProperty('--link', semanticColors.link || null);
       this.domElement.style.setProperty('--bodyBackground', semanticColors.bodyBackground || null);
-      this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
+  //    this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
     }
   }
 

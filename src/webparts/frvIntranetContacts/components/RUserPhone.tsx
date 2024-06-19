@@ -1,4 +1,4 @@
-import { Tooltip, Text,  FluentProvider } from "@fluentui/react-components";
+import { Tooltip, Text,   } from "@fluentui/react-components";
 import { Call24Filled} from "@fluentui/react-icons";
 import { useStyles } from './Styles';
 import * as React from "react";
@@ -11,7 +11,7 @@ interface Props {
     const classes = useStyles();
     if (userphone) {
       return (
-        <FluentProvider>
+
         <span >
           <Tooltip withArrow appearance="inverted" positioning="above-start" content="Work Phone" relationship="label">
             <Call24Filled className={classes.contactIcon} />        
@@ -20,11 +20,11 @@ interface Props {
             <Text className={classes.textStyle} truncate wrap={false}>{userphone}</Text> 
           </Tooltip> 
         </span>
-        </FluentProvider>
+
       );
     } else {
       return (
-        <FluentProvider>
+
         <span >
           <Tooltip withArrow appearance="inverted" positioning="above-start" content="Work Phone" relationship="label">
             <Call24Filled className={classes.contactIcon} />        
@@ -33,7 +33,7 @@ interface Props {
             <Text className={classes.textStyle} truncate wrap={false}>{namephone}</Text> 
           </Tooltip> 
         </span>
-        </FluentProvider>
+
       );
     }
   };

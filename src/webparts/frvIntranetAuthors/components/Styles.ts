@@ -3,14 +3,13 @@ import { makeStyles, shorthands } from "@fluentui/react-components";
 export const useStyles = makeStyles({
   webpartStyle:{
     //backgroundColor: 'var(--bodyBackground)',
-    color: 'var(--bodyText)',
+    //color: 'var(--bodyText)',
   },
   textStyle:{
-    //backgroundColor: 'var(--bodyBackground)',
-    color: 'var(--bodyText)',
+    //color: 'var(--bodyText)',
   },
   fluentProvider:{
-    backgroundColor: 'var(--bodyBackground)',
+    backgroundColor: '#ffffff00',
   },
   button:{
     backgroundColor: 'var(--bodyBackground)',
@@ -24,10 +23,12 @@ export const useStyles = makeStyles({
     flexGrow: 8,
     textAlign: 'left',
     alignContent: 'center',
+    color: 'var(--bodyText)',
   },
   itemIcon:{
     alignContent: 'center',
     paddingRight: '0.25em',
+    color: 'var(--bodyText)',
   },
   itemAction:{
     alignContent: 'center',

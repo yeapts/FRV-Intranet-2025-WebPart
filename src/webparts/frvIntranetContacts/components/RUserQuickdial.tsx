@@ -1,4 +1,4 @@
-import { Tooltip, Text,  FluentProvider } from "@fluentui/react-components";
+import { Tooltip, Text,   } from "@fluentui/react-components";
 import { CallTransfer24Filled} from "@fluentui/react-icons";
 import { useStyles } from './Styles';
 import * as React from "react";
@@ -12,7 +12,7 @@ interface Props {
     const classes = useStyles();
     if (userquickdial) {
       return (
-        <FluentProvider>
+
         <span >
           <Tooltip  appearance="inverted" withArrow  positioning="above-start" content="Quick Dial" relationship="label">
             <CallTransfer24Filled className={classes.contactIcon} />
@@ -21,7 +21,7 @@ interface Props {
             <Text className={classes.textStyle} truncate wrap={false}>{userquickdial}</Text> 
           </Tooltip> 
         </span>
-        </FluentProvider>
+
       );
     } else {
       return (

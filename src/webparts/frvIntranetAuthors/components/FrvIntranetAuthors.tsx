@@ -10,10 +10,14 @@ import {  Button ,  Dialog,
   DialogBody,
   DialogActions,
   DialogContent, Input, Field,
-  FluentProvider, Text} from '@fluentui/react-components';
+   Text,
+   IdPrefixProvider,
+   FluentProvider,
+   } from '@fluentui/react-components';
 import { PersonEditRegular, AddRegular} from "@fluentui/react-icons";
 import { useStyles } from './Styles';
-import { customLightTheme } from './Theme';
+import { customDarkTheme, customLightTheme } from '../../frvIntranetContacts/components/Theme';
+//import { customLightTheme } from './Theme';
 
 const handleDelete = (DeleteItem: (id: string) => Promise<void>, id: string): () => Promise<void> => async () => {
   await DeleteItem(id);
@@ -99,6 +103,7 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
     handleCloseAddDialog();
   }
   
+  const currentTheme = props.isDarkTheme ? customDarkTheme : customLightTheme;
 
   const { webpartTitle, isEditor } = props;
 
@@ -106,7 +111,8 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
     return (
       <div className={classes.webpartStyle}>
       <section className={styles.section}>
-      <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>   
+      <IdPrefixProvider value={`frv-authors-${props.instanceId}-`}>
+      <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
         <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
         <div>
           <div className={classes.listAction}>
@@ -116,14 +122,17 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
             {state.items.map((item) => (
               <div key={item.Id} className={classes.list}>
                 <div><PersonEditRegular className={classes.itemIcon} /></div>
-                <div><Text className={classes.textStyle} truncate wrap={false}>{item.Title}</Text>
-                </div>
+                <div><Text className={classes.itemTitle} truncate wrap={false}>{item.Title}</Text></div>
                 <div className={classes.itemAction}><Button size="small" className={classes.button} onClick={handleDelete(DeleteItem, item.Id)}>Remove</Button> </div>
               </div>
             ))}
           </div>
 
         </div>
+        </FluentProvider>
+        </IdPrefixProvider>
+        <IdPrefixProvider value={`frv-authors-dialog-${props.instanceId}-`}>
+        <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>
         <Dialog open={isAddDialogOpen} onOpenChange={handleCloseAddDialog} >
                 <div>
                   <DialogSurface className={classes.dialogSurface}>
@@ -144,6 +153,7 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
                   </DialogSurface>
                 </div>
               </Dialog>
+
               <Dialog open={isOpen} onOpenChange={handleClose} >
               <div>
                   <DialogSurface >
@@ -162,24 +172,25 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
                   </DialogSurface>
                 </div>
               </Dialog>
-      </FluentProvider>        
+              </FluentProvider>
+        </IdPrefixProvider>
       </section>
       </div>
     );
   } else {
     return (
       <section className={styles.section}>
-      <FluentProvider theme={customLightTheme}  className={classes.fluentProvider}>   
+
         <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
         <div>
             {state.items.map((item) => (
               <div key={item.Id} className={classes.list}>
                 <div><PersonEditRegular className={classes.itemIcon} /></div>
-                <div><Text className={classes.textStyle} truncate wrap={false}>{item.Title}</Text></div>
+                <div><Text className={classes.itemTitle} truncate wrap={false}>{item.Title}</Text></div>
               </div>
             ))}
         </div>
-      </FluentProvider>     
+    
       </section>
     );
   }

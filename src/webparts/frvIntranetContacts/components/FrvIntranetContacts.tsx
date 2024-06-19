@@ -11,9 +11,10 @@ import UserPhone from './RUserPhone';
 import UserQuickdial from './RUserQuickdial';
 import UserEmail from './RUserEmail';
 import { useStyles } from './Styles';
-import { customLightTheme } from './Theme';
-import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, Input} from '@fluentui/react-components';
+//import { customLightTheme } from './Theme';
+import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, IdPrefixProvider, Input} from '@fluentui/react-components';
 import { AddRegular} from "@fluentui/react-icons";
+import { customDarkTheme, customLightTheme } from '../../frvIntranetAuthors/components/Theme';
 //import { Theme } from '@fluentui/react';
 
 const handleDelete = (DeleteItem: (id: number) => Promise<void>, id: number): () => Promise<void> => async () => {
@@ -161,14 +162,17 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
     readAllItems().catch(handleError);
   }, []);
 
- // const currentTheme = props.isDarkTheme ? webDarkTheme : webLightTheme;
+ const currentTheme = props.isDarkTheme ? customDarkTheme : customLightTheme;
 
   if (isEditor === true) 
     {
       return (
         <div className={classes.webpartStyle}>
         <section className={styles.section}>
-        <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>  
+        <IdPrefixProvider value={`frv-contact-${props.instanceId}-`}>
+          <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
+
+
           <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
           <div className={classes.listAction}>
             <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Author</Button>
@@ -186,6 +190,10 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
                 </div>
               ))}
           </div>
+          </FluentProvider>
+        </IdPrefixProvider>
+        <IdPrefixProvider value={`frv-contacts-dialog-${props.instanceId}-`}>
+        <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>
           <Dialog open={isAddDialogOpen} onOpenChange={handleCloseAddDialog} >
             <div>
               <DialogSurface className={classes.dialogSurface}>
@@ -224,7 +232,8 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
               </DialogSurface>
             </div>
           </Dialog>
-        </FluentProvider>  
+          </FluentProvider>
+        </IdPrefixProvider>
         </section>
         </div>
       )
@@ -234,7 +243,7 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
       return (
         <div className={classes.webpartStyle}>
         <section className={styles.section}>
-        <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>  
+
           <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
           <div>
             {state.items.map((item) => (
@@ -248,7 +257,7 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
                 </div>
               ))}
           </div>
-        </FluentProvider>   
+
         </section>
         </div>
       )

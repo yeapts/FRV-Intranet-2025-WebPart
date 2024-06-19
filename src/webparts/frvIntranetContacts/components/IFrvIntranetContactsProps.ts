@@ -1,7 +1,7 @@
 import { WebPartContext } from "@microsoft/sp-webpart-base";
-import { AppMode } from "../FrvIntranetContactsWebPart";
+//import { AppMode } from "../FrvIntranetContactsWebPart";
 import { SPHttpClient } from '@microsoft/sp-http';
-import { IReadonlyTheme } from '@microsoft/sp-component-base';
+//import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 export interface IFrvIntranetContactsProps {
   webpartTitle: string;
@@ -13,6 +13,7 @@ export interface IFrvIntranetContactsProps {
   hasTeamsContext: boolean;
   userDisplayName: string;
   context: WebPartContext;
-  themeVariant: IReadonlyTheme | undefined;
-  appMode: AppMode;
+  instanceId: string;
+ // themeVariant: IReadonlyTheme | undefined;
+ // appMode: AppMode;
 }
