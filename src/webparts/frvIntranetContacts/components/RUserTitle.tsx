@@ -12,19 +12,11 @@ interface Props {
     const classes = useStyles();
     if (usertitle !== null) {
       return (
-
-        <span>
-        <Text className={classes.textStyle} truncate wrap={false}>{usertitle}</Text>   
-        </span>
-
+        <Text className={classes.textStyle} truncate wrap={true} size={200}>{usertitle}</Text>   
       );
     } else {
-      return (
-    
-        <span>
-        <Text className={classes.textStyle} truncate wrap={false}>{nametitle}</Text> 
-        </span>
-
+      return (   
+        <Text className={classes.textStyle} truncate wrap={true} size={200}>{nametitle}</Text> 
       );
     }
   };

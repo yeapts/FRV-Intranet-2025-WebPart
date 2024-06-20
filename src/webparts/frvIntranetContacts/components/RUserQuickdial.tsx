@@ -18,7 +18,7 @@ interface Props {
             <CallTransfer24Filled className={classes.contactIcon} />
           </Tooltip> 
           <Tooltip appearance="inverted" withArrow  positioning="above-start" content="Quick Dial" relationship="label">  
-            <Text className={classes.textStyle} truncate wrap={false}>{userquickdial}</Text> 
+            <Text className={classes.textStyle} truncate wrap={false} size={200}>{userquickdial}</Text> 
           </Tooltip> 
         </span>
 

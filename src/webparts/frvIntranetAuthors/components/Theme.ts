@@ -12,4 +12,6 @@ export const customDarkTheme: Theme = {
   colorBrandBackground: '#0c2340', // overriden token
   colorCompoundBrandStroke: '#0c2340', // overriden token
   colorNeutralBackground1: 'var(--bodyBackground)',
+  colorSubtleBackgroundHover: '#14355f', 
+  colorNeutralBackground1Hover: '#14355f', 
 };  

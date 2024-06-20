@@ -4,7 +4,9 @@
   overflow: hidden;
   padding: 1em;
 }
-
+.contactSection:hover .itemAction{
+  display:flex;
+}
 .section {
   padding: 5px;
 }

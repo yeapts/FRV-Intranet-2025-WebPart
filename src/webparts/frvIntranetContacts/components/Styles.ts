@@ -16,9 +16,9 @@ export const useStyles = makeStyles({
     backgroundColor: "white",
   }  ,
     contactIcon:{
-        paddingLeft:"0px",
-        paddingRight:"5px",
-        paddingBottom:"0px",
+        //paddingLeft:"0px",
+        //paddingRight:"5px",
+        //paddingBottom:"0px",
         width:"12px",
         height:"12px",
         //color: 'var(--bodyText) !important',
@@ -27,10 +27,45 @@ export const useStyles = makeStyles({
       paddingTop: "5px",
       paddingBottom: "5px",
     },
-    itemAction:{
+    contactSection:{
+      paddingTop: "5px",
+      paddingBottom: "5px",
+      display:"flex",
+      '&:hover': {
+        backgroundColor: '#e6e6e6',
+      },
+      '&:hover .itemAction': {
+        backgroundColor: "#ccc",
+        display: 'none',
+      }
+    },
+    itemAction: {
       alignContent: 'center',
       textAlign: 'right',
+      display:'none',
     },  
+    contactDetails:{
+      display: 'flex',
+      flexDirection: 'column',  
+      flexGrow: 8,
+      textAlign: 'left',
+      alignContent: 'center',
+    },
+    contactPhoneDetails:{
+      display: 'flex',
+    },
+    contactPhoneExtension:{
+      paddingRight:'10px',
+    },
+    contactPhoneQuickdial:{
+      paddingRight:'10px',
+    },
+    contactPhotoImage: {
+      width:"45px",
+      height:"45px",
+      margin:"5px",
+    },
+
     button:{
       backgroundColor: 'var(--bodyBackground)',
       color: 'var(--bodyText)',

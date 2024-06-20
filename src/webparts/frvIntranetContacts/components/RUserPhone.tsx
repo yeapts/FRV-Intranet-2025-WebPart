@@ -17,7 +17,7 @@ interface Props {
             <Call24Filled className={classes.contactIcon} />        
           </Tooltip> 
           <Tooltip withArrow appearance="inverted" positioning="above-start" content="Work Phone" relationship="label">    
-            <Text className={classes.textStyle} truncate wrap={false}>{userphone}</Text> 
+            <Text className={classes.textStyle} truncate wrap={false} size={200}>{userphone}</Text> 
           </Tooltip> 
         </span>
 
@@ -30,7 +30,7 @@ interface Props {
             <Call24Filled className={classes.contactIcon} />        
           </Tooltip> 
           <Tooltip withArrow appearance="inverted" positioning="above-start" content="Work Phone" relationship="label">    
-            <Text className={classes.textStyle} truncate wrap={false}>{namephone}</Text> 
+            <Text className={classes.textStyle} truncate wrap={false} size={200}>{namephone}</Text> 
           </Tooltip> 
         </span>
 

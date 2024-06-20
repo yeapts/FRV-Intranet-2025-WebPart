@@ -121,9 +121,9 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
           <div>
             {state.items.map((item) => (
               <div key={item.Id} className={classes.list}>
-                <div><PersonEditRegular className={classes.itemIcon} /></div>
-                <div><Text className={classes.itemTitle} truncate wrap={false}>{item.Title}</Text></div>
-                <div className={classes.itemAction}><Button size="small" className={classes.button} onClick={handleDelete(DeleteItem, item.Id)}>Remove</Button> </div>
+                <PersonEditRegular className={classes.itemIcon} />
+                <Text className={classes.itemTitle} truncate wrap={false}>{item.Title}</Text>
+                <Button size="small" className={classes.button} onClick={handleDelete(DeleteItem, item.Id)}>Remove</Button>
               </div>
             ))}
           </div>

@@ -12,7 +12,7 @@ import UserQuickdial from './RUserQuickdial';
 import UserEmail from './RUserEmail';
 import { useStyles } from './Styles';
 //import { customLightTheme } from './Theme';
-import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, IdPrefixProvider, Input} from '@fluentui/react-components';
+import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, IdPrefixProvider, Input, Image} from '@fluentui/react-components';
 import { AddRegular} from "@fluentui/react-icons";
 import { customDarkTheme, customLightTheme } from '../../frvIntranetAuthors/components/Theme';
 //import { Theme } from '@fluentui/react';
@@ -153,7 +153,7 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
       } catch (error) {
         handleError(error);
         console.log(`Error adding item: ${error}`);
-        setState({ status: 'error adding', items: [] });
+        alert("Unable to add contact. Check email address is entered correctly.")
       }
       handleCloseAddDialog();
     }
@@ -171,22 +171,27 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
         <section className={styles.section}>
         <IdPrefixProvider value={`frv-contact-${props.instanceId}-`}>
           <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
-
-
           <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
           <div className={classes.listAction}>
             <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Author</Button>
           </div>
           <div>
             {state.items.map((item) => (
-                <div className={classes.itemSection} key={item.ID}>
-                  <div><UserName username={item.Title} nametitle={item.Name.Title}/></div>
-                  <div><UserTitle usertitle={item.JobTitle} nametitle={item.Name.JobTitle}/></div>
-                  <div><UserMobile usermobile={item.Mobile} namemobile={item.Name.MobilePhone}/></div>
-                  <div><UserQuickdial userquickdial={item.QuickDial}/></div>
-                  <div><UserPhone userphone={item.Phone} namephone={item.Name.WorkPhone}/></div>
-                  <div><UserEmail useremail={item.Name.EMail} /></div>
-                  <div className={classes.itemAction}><Button size="small" className={classes.button} onClick={handleDelete(DeleteItem, item.ID)}>Remove</Button></div>
+                <div className={`${styles.contactSection} ${classes.contactSection}`} key={item.ID}>               
+                  <Image className={classes.contactPhotoImage} src={`${props.absoluteUrl}/_layouts/15/userphoto.aspx?size=S&username=${encodeURIComponent(item.Name.EMail)}`} {...props} fit="center" shape="circular" />
+                  <div className={classes.contactDetails}>
+                    <div><UserName username={item.Title} nametitle={item.Name.Title}/></div>
+                    <div><UserTitle usertitle={item.JobTitle} nametitle={item.Name.JobTitle}/></div>
+                    <div className={classes.contactPhoneDetails}>
+                      <span className={classes.contactPhoneExtension}><UserPhone userphone={item.Phone} namephone={item.Name.WorkPhone}/></span>
+                      <span className={classes.contactPhoneQuickdial}><UserQuickdial userquickdial={item.QuickDial}/></span>   
+                      <span><UserMobile usermobile={item.Mobile} namemobile={item.Name.MobilePhone}/></span>                     
+                    </div>                  
+                    <div><UserEmail useremail={item.Name.EMail} /></div>
+                  </div>
+                  <div className={`${styles.itemAction} ${classes.itemAction}`}>                 
+                    <Button size="small" className={classes.button} onClick={handleDelete(DeleteItem, item.ID)}>Remove</Button>
+                  </div>   
                 </div>
               ))}
           </div>
@@ -195,7 +200,6 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
         <IdPrefixProvider value={`frv-contacts-dialog-${props.instanceId}-`}>
         <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>
           <Dialog open={isAddDialogOpen} onOpenChange={handleCloseAddDialog} >
-            <div>
               <DialogSurface className={classes.dialogSurface}>
                 <DialogBody>
                   <DialogTitle className={classes.inputField}>Add author</DialogTitle>
@@ -212,10 +216,8 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
                   </DialogActions>
                 </DialogBody>
               </DialogSurface>
-            </div>
           </Dialog>
           <Dialog open={isOpen} onOpenChange={handleClose} >
-            <div>
               <DialogSurface >
                 <DialogBody>
                   <DialogTitle>Delete</DialogTitle>
@@ -230,7 +232,6 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
                   </DialogActions>
                 </DialogBody>
               </DialogSurface>
-            </div>
           </Dialog>
           </FluentProvider>
         </IdPrefixProvider>
