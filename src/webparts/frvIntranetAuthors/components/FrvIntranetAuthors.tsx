@@ -16,8 +16,7 @@ import {  Button ,  Dialog,
    } from '@fluentui/react-components';
 import { PersonEditRegular, AddRegular} from "@fluentui/react-icons";
 import { useStyles } from './Styles';
-import { customDarkTheme, customLightTheme } from '../../frvIntranetContacts/components/Theme';
-//import { customLightTheme } from './Theme';
+import { customDarkTheme, customLightTheme } from '../../frvIntranet2025WebPart/components/Theme';
 
 const handleDelete = (DeleteItem: (id: string) => Promise<void>, id: string): () => Promise<void> => async () => {
   await DeleteItem(id);

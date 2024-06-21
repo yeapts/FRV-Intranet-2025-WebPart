@@ -34,10 +34,6 @@ export const useStyles = makeStyles({
       '&:hover': {
         backgroundColor: '#e6e6e6',
       },
-      '&:hover .itemAction': {
-        backgroundColor: "#ccc",
-        display: 'none',
-      }
     },
     itemAction: {
       alignContent: 'center',

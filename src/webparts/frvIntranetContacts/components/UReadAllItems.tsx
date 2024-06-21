@@ -1,0 +1,25 @@
+// ReadAllItems.ts
+import { SPHttpClient } from '@microsoft/sp-http';
+import { getAllItems } from './UGetAllItems'; // Import the getAllItems function from the API file
+import { IState } from './IState';
+
+const handleError = (error: Error): void => {  
+    console.error(error);  // Log the error or send it to an error reporting service here
+  };
+
+  interface Props {
+    absoluteUrl: string;
+    spHttpClient: SPHttpClient;
+  }
+
+export const readAllItems = async (props: Props, setState: React.Dispatch<React.SetStateAction<IState>>): Promise<void> => {
+  try {
+    setState({ status: 'Loading all items...', items: [] });
+    const items = await getAllItems(props);
+    setState({ status: 'Items loaded', items });
+    console.log({ items });
+  } catch (error) {
+    handleError(error);
+    setState({ status: `Loading failed: ${error}`, items: [] });
+  }
+};

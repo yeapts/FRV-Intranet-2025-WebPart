@@ -2,8 +2,6 @@ import * as React from 'react';
 import styles from './FrvIntranetContacts.module.scss';
 import type { IFrvIntranetContactsProps } from './IFrvIntranetContactsProps';
 import { IState } from './IState'; 
-import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
-import { Item } from './IItem';
 import UserName from './RUserName';
 import UserTitle from './RUserTitle';
 import UserMobile from './RUserMobile';
@@ -11,15 +9,12 @@ import UserPhone from './RUserPhone';
 import UserQuickdial from './RUserQuickdial';
 import UserEmail from './RUserEmail';
 import { useStyles } from './Styles';
-//import { customLightTheme } from './Theme';
 import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, IdPrefixProvider, Input, Image} from '@fluentui/react-components';
 import { AddRegular} from "@fluentui/react-icons";
-import { customDarkTheme, customLightTheme } from '../../frvIntranetAuthors/components/Theme';
-//import { Theme } from '@fluentui/react';
-
-const handleDelete = (DeleteItem: (id: number) => Promise<void>, id: number): () => Promise<void> => async () => {
-  await DeleteItem(id);
-};
+import { customDarkTheme, customLightTheme } from '../../frvIntranet2025WebPart/components/Theme';
+import { readAllItems } from './UReadAllItems';
+import DeleteItem from './UDeleteItem';
+import { createItem } from './UCreateItem';
 
 const handleError = (error: Error): void => {  
   console.error(error);  // Log the error or send it to an error reporting service here
@@ -44,122 +39,38 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
   const handleClose = ():void => {
     setIsOpen(false);
   };
-  const fetchItems = async (): Promise<Item[]> => {
-    const endpoint = `${props.absoluteUrl}/_api/web/lists/GetByTitle('Contacts')/Items?$expand=Name&$select=Name/Title,Name/EMail,Name/Department,Name/JobTitle,Name/WorkPhone,Name/FirstName,Name/MobilePhone,Name/Modified,Name/Created,Name/LastName,ID,QuickDial,Title,Mobile,Phone,Sort,JobTitle&$orderby=Sort asc`;
-    const response = await props.spHttpClient.get(endpoint, SPHttpClient.configurations.v1);
-    const { value = [] } = await response.json();
-    return value;
+
+  const handleReadAllItems = async (): Promise<void> => {
+    await readAllItems(props, setState);
   };
 
-  const readAllItems = async (): Promise<void> => {
+  const handleDelete = ( id: number): (() => Promise<void>) => async () => {
     try {
-      setState({ status: 'Loading all items...', items: [] });
-      const items = await fetchItems();
-      setState({ status: 'Items loaded', items });
-      console.log({ items });
-    } catch (error) {
-      handleError(error);
-      setState({ status: `Loading failed: ${error}`, items: [] });
-    }
-  };
-
-  const DeleteItem = async (itemId:number): Promise<void> => {
-    try {
-      console.log (`Deleting... ${itemId}`);
-      await props.spHttpClient.post(`${props.absoluteUrl}/_api/web/lists/getByTitle('Contacts')/items(${itemId})`,SPHttpClient.configurations.v1,
-      {headers: {
-        'Accept': 'application/json;odata=nometadata',
-        'Content-type': 'application/json;odata=verbose',
-        'odata-version': '',
-        'IF-MATCH': "*",
-        'X-HTTP-Method': 'DELETE'
-      }});
-      console.log(`Item with ID: ${itemId} successfully deleted`);
-      setState({ status: 'successfully deleted', items: [] });
-      readAllItems().catch(handleError);
+      await DeleteItem( props, setState, id);
     } catch (error) {
       handleError(error);
       console.log(`Error deleting item: ${error}`);
-      setState({ status: 'error deleting', items: [] });
     }
-    console.log (`Deleted... ${itemId}`);
-  }
-
-
-
-  const getLatestUserId = (inputEmailValue:string): Promise<number> => {
-    return new Promise<number>((resolve: (userId: number) => void, reject: (error: Error) => void): void => {
-      props.spHttpClient.get(`${props.absoluteUrl}/_api/web/siteusers?$filter=UserPrincipalName eq '${inputEmailValue.toLowerCase()}'`, SPHttpClient.configurations.v1, {
-        headers: {
-          'Accept': 'application/json;odata=nometadata',
-          'odata-version': ''
-        }
-      })
-        .then((response: SPHttpClientResponse): Promise<{ value: { Id: number }[] }> => {
-          return response.json();
-        }, (error: Error): void => {
-          console.log(`Error getting user ... ${inputEmailValue.toLowerCase()}`);
-          reject(error);
-        })
-        .then((response: { value: { Id: number }[] }): void => {
-          if (response.value.length === 0) {
-            console.log(`Nout found user ... ${inputEmailValue.toLowerCase()}`);
-            resolve(-1);
-          }
-          else {
-            resolve(response.value[0].Id);
-            console.log(`Found user ... ${inputEmailValue.toLowerCase()}`);
-          }
-        })
-        .catch((error: Error): void => {
-          console.log(`Error getting user ID ... ${inputEmailValue.toLowerCase()}`);
-          reject(error);
-        });
-    });
   };
 
-  const createItem = async (): Promise<void> =>
-    {
-      const inputEmail = document.getElementById('inputEmail') as HTMLInputElement;
-      const inputEmailValue = inputEmail.value;
-      try {
-        const latestUserId = await getLatestUserId(inputEmailValue);
-        if (latestUserId === -1) { throw new Error('No user found in the list'); }    
-        console.log(`Loading information about user ID: ${latestUserId}...`);
-        const response = await props.spHttpClient.get(`${props.absoluteUrl}/_api/web/lists/getByTitle('Contacts')/items?$filter=NameId eq ${latestUserId}`, SPHttpClient.configurations.v1, {
-          headers: {
-            'Accept': 'application/json;odata=nometadata',
-            'odata-version': ''
-          }
-        });
-        console.log('Response status:', response.status);
-        console.log(`Adding... ${inputEmail} - value: ${inputEmailValue}`);
-        const body: string = JSON.stringify({  
-          'Title': "",
-          'NameId': latestUserId,
-          'Sort': 0,
-        }); 
-        await props.spHttpClient.post(`${props.absoluteUrl}/_api/web/lists/getByTitle('Contacts')/items`, SPHttpClient.configurations.v1, {
-          headers: {
-            'Accept': 'application/json;odata=nometadata',
-            'Content-type': 'application/json;odata=nometadata',
-            'odata-version': '',
-          },
-          body: body
-        });   
-        console.log(`Item added`);
-        setState({ status: 'successfully added', items: [] });
-        readAllItems().catch(handleError);
-      } catch (error) {
-        handleError(error);
-        console.log(`Error adding item: ${error}`);
-        alert("Unable to add contact. Check email address is entered correctly.")
-      }
-      handleCloseAddDialog();
+  const handleCreateItem = async (): Promise<void> => {
+    const inputEmail = document.getElementById('inputEmail') as HTMLInputElement | null;
+    if (!inputEmail) {
+      console.error('Input element with id "inputEmail" not found');
+      return;
     }
+    const inputEmailValue = inputEmail.value;
+  
+    try {
+      await createItem(props, inputEmailValue, setAddDialogIsOpen, setState);
+    } catch (error) {
+      handleError(error);
+      console.log(`Error creating item: ${error}`);
+    }
+  };
 
   React.useEffect(() => {
-    readAllItems().catch(handleError);
+    handleReadAllItems().catch(handleError);
   }, []);
 
  const currentTheme = props.isDarkTheme ? customDarkTheme : customLightTheme;
@@ -190,7 +101,7 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
                     <div><UserEmail useremail={item.Name.EMail} /></div>
                   </div>
                   <div className={`${styles.itemAction} ${classes.itemAction}`}>                 
-                    <Button size="small" className={classes.button} onClick={handleDelete(DeleteItem, item.ID)}>Remove</Button>
+                    <Button size="small" className={classes.button} onClick={handleDelete ( item.ID)}>Remove</Button>
                   </div>   
                 </div>
               ))}
@@ -209,7 +120,7 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
                     </Field>
                   </DialogContent>
                   <DialogActions>
-                    <Button appearance="primary"  onClick={()=>createItem()} >Add</Button>                  
+                    <Button appearance="primary"  onClick={()=>handleCreateItem()} >Add</Button>                  
                     <DialogTrigger disableButtonEnhancement>
                       <Button >Cancel</Button>
                     </DialogTrigger>
