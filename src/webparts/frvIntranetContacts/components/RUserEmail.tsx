@@ -13,14 +13,14 @@ interface Props {
     if (useremail) {
       return (
 
-        <span >
+        <div className={classes.contactEmail}>
           <Tooltip withArrow appearance="inverted" positioning="above-start" content="Email" relationship="label">
             <Mail24Filled className={classes.contactIcon} />        
           </Tooltip> 
           <Tooltip withArrow appearance="inverted" positioning="above-start" content="Email" relationship="label">      
             <Text className={classes.textStyle} truncate wrap={false} size={200}>{useremail}</Text> 
           </Tooltip> 
-        </span>
+        </div>
 
       );
     } else {

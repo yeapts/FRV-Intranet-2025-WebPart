@@ -30,15 +30,28 @@ export const useStyles = makeStyles({
     paddingRight: '0.25em',
     color: 'var(--bodyText)',
   },
-  itemAction:{
+  itemAction: {
     alignContent: 'center',
     textAlign: 'right',
-  },
+    display:'none',
+  }, 
   list:{
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'nowrap',
   },
+
+  authorSection:{
+    marginTop: "5px",
+    marginBottom: "5px",
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    display:"flex",
+    '&:hover': {
+      backgroundColor: '#a1a1a133',
+    },
+  },
+
   dialogSurface: {
     backgroundColor: 'white',
   },

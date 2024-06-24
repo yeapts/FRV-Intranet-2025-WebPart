@@ -13,21 +13,21 @@ interface Props {
     if (usermobile) {
       return (
 
-        <span >
+        <div className={classes.contactMobilePhone}>
           <Tooltip withArrow appearance="inverted" positioning="above-start" content="Mobile Phone" relationship="label">
             <ViewDesktopMobile24Filled className={classes.contactIcon} />        
           </Tooltip> 
           <Tooltip withArrow appearance="inverted" positioning="above-start" content="Mobile Phone" relationship="label">    
             <Text className={classes.textStyle} truncate wrap={false} size={200}>{usermobile}</Text> 
           </Tooltip> 
-        </span>
+        </div>
 
       );
     } else {
       return (
-        <span>
+        <div>
           {namemobile}
-        </span>
+        </div>
       );
     }
   };

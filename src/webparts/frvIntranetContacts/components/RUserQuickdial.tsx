@@ -12,15 +12,14 @@ interface Props {
     const classes = useStyles();
     if (userquickdial) {
       return (
-
-        <span >
+        <div className={classes.contactPhoneQuickdial}>
           <Tooltip  appearance="inverted" withArrow  positioning="above-start" content="Quick Dial" relationship="label">
             <CallTransfer24Filled className={classes.contactIcon} />
           </Tooltip> 
           <Tooltip appearance="inverted" withArrow  positioning="above-start" content="Quick Dial" relationship="label">  
             <Text className={classes.textStyle} truncate wrap={false} size={200}>{userquickdial}</Text> 
           </Tooltip> 
-        </span>
+        </div>
 
       );
     } else {

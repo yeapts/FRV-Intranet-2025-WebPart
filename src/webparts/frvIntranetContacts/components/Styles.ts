@@ -8,6 +8,8 @@ export const useStyles = makeStyles({
   textStyle:{
     //backgroundColor: 'var(--bodyBackground)',
     //color: 'var(--bodyText)',
+    overflow: "hidden",
+    display: "block",
   },
   fluentProvider:{
     backgroundColor: '#ffffff00',
@@ -24,15 +26,15 @@ export const useStyles = makeStyles({
         //color: 'var(--bodyText) !important',
       },
     itemSection:{
-      paddingTop: "5px",
-      paddingBottom: "5px",
+      marginTop: "5px",
+      marginBottom: "5px",
     },
     contactSection:{
-      paddingTop: "5px",
-      paddingBottom: "5px",
+      marginTop: "5px",
+      marginBottom: "5px",
       display:"flex",
       '&:hover': {
-        backgroundColor: '#e6e6e6',
+        backgroundColor: '#a1a1a133',
       },
     },
     itemAction: {
@@ -46,20 +48,33 @@ export const useStyles = makeStyles({
       flexGrow: 8,
       textAlign: 'left',
       alignContent: 'center',
+      paddingLeft: '12px',
     },
     contactPhoneDetails:{
       display: 'flex',
     },
     contactPhoneExtension:{
       paddingRight:'10px',
+      display: 'flex',
+      flexDirection: 'row',  
     },
     contactPhoneQuickdial:{
       paddingRight:'10px',
+      display: 'flex',
+      flexDirection: 'row',  
+    },
+    contactEmail:{
+      paddingRight:'10px',
+      display: 'flex',
+      flexDirection: 'row',  
+    },
+    contactMobilePhone:{
+      display: 'flex',
+      flexDirection: 'row',  
     },
     contactPhotoImage: {
       width:"45px",
       height:"45px",
-      margin:"5px",
     },
 
     button:{
@@ -84,6 +99,6 @@ export const useStyles = makeStyles({
     inputField: {
       backgroundColor: 'white !important',
       color: 'black !important',
-    }
+    },
     }
 )

@@ -94,11 +94,11 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
                     <div><UserName username={item.Title} nametitle={item.Name.Title}/></div>
                     <div><UserTitle usertitle={item.JobTitle} nametitle={item.Name.JobTitle}/></div>
                     <div className={classes.contactPhoneDetails}>
-                      <span className={classes.contactPhoneExtension}><UserPhone userphone={item.Phone} namephone={item.Name.WorkPhone}/></span>
-                      <span className={classes.contactPhoneQuickdial}><UserQuickdial userquickdial={item.QuickDial}/></span>   
-                      <span><UserMobile usermobile={item.Mobile} namemobile={item.Name.MobilePhone}/></span>                     
+                      <UserPhone userphone={item.Phone} namephone={item.Name.WorkPhone}/>
+                      <UserQuickdial userquickdial={item.QuickDial}/>  
+                      <UserMobile usermobile={item.Mobile} namemobile={item.Name.MobilePhone}/>                    
                     </div>                  
-                    <div><UserEmail useremail={item.Name.EMail} /></div>
+                    <UserEmail useremail={item.Name.EMail} />
                   </div>
                   <div className={`${styles.itemAction} ${classes.itemAction}`}>                 
                     <Button size="small" className={classes.button} onClick={handleDelete ( item.ID)}>Remove</Button>

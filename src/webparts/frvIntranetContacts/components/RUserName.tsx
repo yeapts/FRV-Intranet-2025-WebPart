@@ -1,4 +1,4 @@
-import { Subtitle2Stronger} from "@fluentui/react-components";
+import { Text} from "@fluentui/react-components";
 import { useStyles } from './Styles';
 import * as React from "react";
 //import { customLightTheme } from "./Theme";
@@ -14,7 +14,7 @@ interface Props {
       return (
 
         <span >
-            <Subtitle2Stronger className={classes.textStyle} truncate wrap={false}>{username}</Subtitle2Stronger> 
+            <Text size={300} weight="medium" className={classes.textStyle} truncate wrap={false}>{username}</Text> 
         </span>
 
       );
@@ -22,7 +22,7 @@ interface Props {
       return (
   
         <span >
-            <Subtitle2Stronger className={classes.textStyle} truncate wrap={false}>{nametitle}</Subtitle2Stronger> 
+            <Text size={300} weight="medium" className={classes.textStyle} truncate wrap={false}>{nametitle}</Text> 
         </span>
 
       );

@@ -5,6 +5,12 @@ export const customLightTheme: Theme = {
   colorBrandBackground: '#0c2340', 
   colorCompoundBrandStroke: '#0c2340', 
   colorNeutralBackground1: 'var(--bodyBackground)',
+  colorSubtleBackgroundHover: '#14355f',  //Button Hover
+  colorNeutralBackground1Hover: '#14355f',  //Dialog Buton Hover
+  colorNeutralStroke1Hover: 'white', // Button border color
+  colorNeutralForeground1Hover: 'white', // Button Text color
+  colorNeutralForeground2Hover: 'white', // Button Text color
+  colorNeutralForeground2BrandHover: 'white', // Button icon color
 };  
 
 export const customDarkTheme: Theme = {
@@ -12,6 +18,10 @@ export const customDarkTheme: Theme = {
   colorBrandBackground: '#0c2340', 
   colorCompoundBrandStroke: '#0c2340', 
   colorNeutralBackground1: 'var(--bodyBackground)',
-  colorSubtleBackgroundHover: '#14355f', 
-  colorNeutralBackground1Hover: '#14355f', 
+  colorSubtleBackgroundHover: '#14355f', //Button Hover
+  colorNeutralBackground1Hover: '#14355f',  //Dialog Buton Hover
+  colorNeutralStroke1Hover: 'white', // Button border color
+  colorNeutralForeground1Hover: 'white', // Button Text color
+  colorNeutralForeground2Hover: 'white', // Button Text color
+  colorNeutralForeground2BrandHover: 'white', // Button icon color
 };  

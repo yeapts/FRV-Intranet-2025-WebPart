@@ -7,16 +7,12 @@
   overflow: hidden;
   padding: 1em;
 }
-
-.welcome {
-  text-align: center;
+.authorSection:hover .itemAction{
+  display:flex;
 }
-
-.welcomeImage {
-  width: 100%;
-  max-width: 420px;
+.authorSection{
+  display:'flex';
 }
-
 .links {
   a {
     text-decoration: none;
