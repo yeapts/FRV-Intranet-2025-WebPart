@@ -11,6 +11,7 @@ export const customLightTheme: Theme = {
   colorNeutralForeground1Hover: 'white', // Button Text color
   colorNeutralForeground2Hover: 'white', // Button Text color
   colorNeutralForeground2BrandHover: 'white', // Button icon color
+  colorNeutralBackgroundStatic: '#0c2340' ,
 };  
 
 export const customDarkTheme: Theme = {
@@ -24,4 +25,5 @@ export const customDarkTheme: Theme = {
   colorNeutralForeground1Hover: 'white', // Button Text color
   colorNeutralForeground2Hover: 'white', // Button Text color
   colorNeutralForeground2BrandHover: 'white', // Button icon color
+  colorNeutralBackgroundStatic: '#0c2340' ,
 };  

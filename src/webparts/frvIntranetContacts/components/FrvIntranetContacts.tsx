@@ -88,14 +88,15 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
           </div>
           <div>
             {state.items.map((item) => (
-                <div className={`${styles.contactSection} ${classes.contactSection}`} key={item.ID}>               
+                <div className={`${styles.contactSection} ${classes.contactSection}`} key={item.ID}>   
+                  <div className={classes.contactPhotoDetails}>            
                   <Image className={classes.contactPhotoImage} src={`${props.absoluteUrl}/_layouts/15/userphoto.aspx?size=S&username=${encodeURIComponent(item.Name.EMail)}`} {...props} fit="center" shape="circular" />
+                  </div>
                   <div className={classes.contactDetails}>
                     <div><UserName username={item.Title} nametitle={item.Name.Title}/></div>
-                    <div><UserTitle usertitle={item.JobTitle} nametitle={item.Name.JobTitle}/></div>
+                    <UserTitle usertitle={item.JobTitle} nametitle={item.Name.JobTitle} />
                     <div className={classes.contactPhoneDetails}>
                       <UserPhone userphone={item.Phone} namephone={item.Name.WorkPhone}/>
-                      <UserQuickdial userquickdial={item.QuickDial}/>  
                       <UserMobile usermobile={item.Mobile} namemobile={item.Name.MobilePhone}/>                    
                     </div>                  
                     <UserEmail useremail={item.Name.EMail} />
@@ -161,7 +162,7 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
             {state.items.map((item) => (
                 <div className={classes.itemSection} key={item.ID}>
                   <div><UserName username={item.Title} nametitle={item.Name.Title}/></div>
-                  <div><UserTitle usertitle={item.JobTitle} nametitle={item.Name.JobTitle}/></div>
+                  <div><UserTitle usertitle={item.JobTitle} nametitle={item.Name.JobTitle} /></div>
                   <div><UserMobile usermobile={item.Mobile} namemobile={item.Name.MobilePhone}/></div>
                   <div><UserQuickdial userquickdial={item.QuickDial}/></div>
                   <div><UserPhone userphone={item.Phone} namephone={item.Name.WorkPhone}/></div>

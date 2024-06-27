@@ -31,16 +31,20 @@ export const useStyles = makeStyles({
     },
     contactSection:{
       marginTop: "5px",
-      marginBottom: "5px",
+      marginBottom: "15px",
       display:"flex",
       '&:hover': {
         backgroundColor: '#a1a1a133',
       },
+      position:'relative',
     },
     itemAction: {
       alignContent: 'center',
       textAlign: 'right',
       display:'none',
+      position:'absolute',
+      right: '5px',
+      bottom: '5px',
     },  
     contactDetails:{
       display: 'flex',
@@ -49,28 +53,42 @@ export const useStyles = makeStyles({
       textAlign: 'left',
       alignContent: 'center',
       paddingLeft: '12px',
+      maxWidth: '80%',
+    },
+    contactPhotoDetails:{
+      flexGrow: 0,
+      
     },
     contactPhoneDetails:{
       display: 'flex',
+      paddingTop: '3px',
+      paddingBottom: '3px',
     },
     contactPhoneExtension:{
       paddingRight:'10px',
       display: 'flex',
       flexDirection: 'row',  
+      alignItems: 'center',
     },
     contactPhoneQuickdial:{
       paddingRight:'10px',
       display: 'flex',
       flexDirection: 'row',  
+      alignItems: 'center',
     },
     contactEmail:{
       paddingRight:'10px',
       display: 'flex',
       flexDirection: 'row',  
+      alignItems: 'center',
+      '& span':{
+          paddingLeft: '5px', 
+      }
     },
     contactMobilePhone:{
       display: 'flex',
       flexDirection: 'row',  
+      alignItems: 'center',
     },
     contactPhotoImage: {
       width:"45px",
