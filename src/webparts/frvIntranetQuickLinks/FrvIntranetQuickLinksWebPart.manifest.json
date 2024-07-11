@@ -1,0 +1,22 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "a8c38bc2-9425-4b10-aedf-fedc5cd261f0",
+  "alias": "FrvIntranetQuickLinksWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", 
+    "group": { "default": "Advanced" },
+    "title": { "default": "FRV Intranet Quick Links" },
+    "description": { "default": "FRV Intranet Quick Links description" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "FRV Intranet Quick Links",
+      "webparttitle": "Quick Links"
+    }
+  }]
+}

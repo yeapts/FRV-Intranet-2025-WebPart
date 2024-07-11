@@ -25,12 +25,21 @@
           "manifest": "./src/webparts/frvIntranetContacts/FrvIntranetContactsWebPart.manifest.json"
         }
       ]
+    },
+    "frv-intranet-quick-links-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/frvIntranetQuickLinks/FrvIntranetQuickLinksWebPart.js",
+          "manifest": "./src/webparts/frvIntranetQuickLinks/FrvIntranetQuickLinksWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "FrvIntranet2025WebPartWebPartStrings": "lib/webparts/frvIntranet2025WebPart/loc/{locale}.js",
     "FrvIntranetAuthorsWebPartStrings": "lib/webparts/frvIntranetAuthors/loc/{locale}.js",
-    "FrvIntranetContactsWebPartStrings": "lib/webparts/frvIntranetContacts/loc/{locale}.js"
+    "FrvIntranetContactsWebPartStrings": "lib/webparts/frvIntranetContacts/loc/{locale}.js",
+    "FrvIntranetQuickLinksWebPartStrings": "lib/webparts/frvIntranetQuickLinks/loc/{locale}.js"
   }
 }
