@@ -12,9 +12,9 @@ interface Props {
     const classes = useStyles ();
     if (title) {
       return (
-        <div className={classes.iconCell}>
+        <div className={classes.iconCellTitle}>
           <a href={url}>
-            <Text size={300} weight="medium" className={classes.textStyle} truncate wrap={false}>{title}</Text> 
+            <Text align="center" size={300} weight="medium" className={classes.textStyle} truncate wrap={true}>{title}</Text> 
           </a>
         </div>
       );

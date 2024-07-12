@@ -6,13 +6,17 @@ import * as React from "react";
 interface Props {
   url: string | undefined;
   icon: string | undefined;
+  isdarkmode: boolean;
   }
 
-  const Icon = ({ url, icon }: Props): JSX.Element => {
+
+  const Icon = ({ url, icon, isdarkmode }: Props): JSX.Element => {
     const classes = useStyles ();
+    const currentIconCell =  isdarkmode ? classes.iconCellDark : classes.iconCell;
+
     if (icon) {
       return (
-        <div className={classes.iconCell}>
+        <div className={currentIconCell}>
           <a href={url}>
             <Image className={classes.iconImage} src={icon}/> 
           </a>
@@ -20,9 +24,9 @@ interface Props {
       );
     } else {
       return (  
-        <div className={classes.iconCell}>
+        <div className={currentIconCell}>
           <a href={url}>
-            <Image className={classes.iconImage} src={require('../assets/document-file-office-svgrepo-com.svg')}/> 
+            <Image className={classes.iconImage} src={require('../assets/documents.svg')}/> 
           </a>
         </div>
       );

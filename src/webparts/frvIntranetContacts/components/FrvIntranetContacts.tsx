@@ -84,7 +84,7 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
           <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
           <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
           <div className={classes.listAction}>
-            <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Author</Button>
+            <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Contact</Button>
           </div>
           <div>
             {state.items.map((item) => (

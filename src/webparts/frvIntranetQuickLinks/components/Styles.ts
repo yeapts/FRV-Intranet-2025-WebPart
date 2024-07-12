@@ -2,23 +2,41 @@ import { makeStyles, shorthands } from "@fluentui/react-components";
 
 export const useStyles = makeStyles({  
 iconCell:{
-  maxWidth: "100px",
+  maxWidth: "110px",
+  backgroundColor: '#0c2340',
 },
+iconCellDark:{
+  maxWidth: "110px",
+  backgroundColor: '#3A597F',
+},
+
+iconCellTitle:{
+  maxWidth: "110px",
+},
+
 listSection :{
   marginTop: "5px",
   marginBottom: "15px",
   display:"flex",
   flexDirection:"row",
+  gap: "10px",
   flexWrap:"wrap",
-  '&:hover': {
-    backgroundColor: '#a1a1a133',
-  },
   position:'relative',
 
 },
 iconImage:{
 width:'100%',
+filter:  'invert(98%) sepia(98%) saturate(7%) hue-rotate(155deg) brightness(102%) contrast(106%)',
+
+padding: "10px",
 },
+
+
+iconImageDark:{
+  width:'100%',
+  
+  padding: "10px",
+  },
 itemDetail:{
   display: 'flex',
   flexDirection: 'column',  
@@ -53,17 +71,17 @@ itemDetail:{
         //color: 'var(--bodyText) !important',
       },
     itemSection:{
-      marginTop: "5px",
-      marginBottom: "5px",
+      margin: "5px",
       maxWidth: "300px",
+      '&:hover': {
+        backgroundColor: '#a1a1a133',
+      },
     },
     contactSection:{
       marginTop: "5px",
       marginBottom: "15px",
       display:"flex",
-      '&:hover': {
-        backgroundColor: '#a1a1a133',
-      },
+
       position:'relative',
     },
     itemAction: {
