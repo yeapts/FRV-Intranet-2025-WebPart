@@ -3,6 +3,8 @@ import { SPHttpClient } from '@microsoft/sp-http';
 
 export interface IFrvIntranetQuickLinksProps {
   webpartTitle: string;
+  webpartType:string;
+  webpartImage: string;
   absoluteUrl: string;
   spHttpClient: SPHttpClient; 
   isEditor: boolean;
@@ -12,4 +14,6 @@ export interface IFrvIntranetQuickLinksProps {
   userDisplayName: string;
   context: WebPartContext;
   instanceId: string;
+  webpartWidth: number;
+  pageFileName:string;
 }

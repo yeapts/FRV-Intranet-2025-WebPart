@@ -37,15 +37,27 @@ iconImageDark:{
   
   padding: "10px",
   },
+
 itemDetail:{
   display: 'flex',
   flexDirection: 'column',  
   textAlign: 'left',
   alignContent: 'center',
-  maxWidth: '300px',
+  position: 'relative',
+  maxWidth: '300px',  
+  '&:hover': {
+    backgroundColor: '#a1a1a133',
+  },
 },
 
-
+itemAction: {
+  alignContent: 'center',
+  textAlign: 'right',
+  display:'none',
+  position:'absolute',
+  right: '5px',
+  bottom: '5px',
+}, 
   webpartStyle:{
     //backgroundColor: 'var(--bodyBackground)',
     //color: 'var(--bodyText)',
@@ -84,14 +96,7 @@ itemDetail:{
 
       position:'relative',
     },
-    itemAction: {
-      alignContent: 'center',
-      textAlign: 'right',
-      display:'none',
-      position:'absolute',
-      right: '5px',
-      bottom: '5px',
-    },  
+ 
     contactDetails:{
       display: 'flex',
       flexDirection: 'column',  

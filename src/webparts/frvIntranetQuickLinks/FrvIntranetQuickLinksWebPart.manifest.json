@@ -16,7 +16,9 @@
     "officeFabricIconFontName": "Page",
     "properties": {
       "description": "FRV Intranet Quick Links",
-      "webparttitle": "Quick Links"
+      "webparttitle": "Quick Links",
+      "webparttype": "Topics",
+      "webpartimage": "Icons"
     }
   }]
 }
