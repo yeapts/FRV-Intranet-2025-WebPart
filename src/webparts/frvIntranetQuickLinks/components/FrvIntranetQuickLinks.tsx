@@ -32,7 +32,7 @@ const customQuickLinksTheme: Theme = {
 
 const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => {
   const [state, setState] = React.useState<IState>({ items: [], status: '', });
-  const { webpartTitle, isEditor, webpartWidth, pageFileName, webpartType } = props;
+  const { webpartTitle, isEditor,  pageFileName, webpartType } = props;
   const [isAddDialogOpen, setAddDialogIsOpen] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
   const [URLvalue, setURLValue] = React.useState("https://");
@@ -47,6 +47,7 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
   }
   const handleCloseAddDialog = ():void => {
     setAddDialogIsOpen(false);
+    setURLValue ("https://");
   };
 
   const handleClose = ():void => {
@@ -73,7 +74,8 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
     
   
     try {
-      await createItem(props, inputTitle.value , URLvalue, webpartType , pageFileName , setAddDialogIsOpen, setState);
+      await createItem(props, inputTitle.value , URLvalue, webpartType , pageFileName , webpartTitle, setAddDialogIsOpen, setState);
+      setURLValue ("https://");
     } catch (error) {
       handleError(error);
       console.log(`Error creating item: ${error}`);
@@ -110,7 +112,7 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
         <div className={classes.listSection}>
             {state.items.map((item) => (
                 <div className={`${styles.quicklinkSection} ${classes.itemDetail}`} key={item.ID}>
-                  <Icon url={item.Url} icon={item.Icon} isdarkmode={props.isDarkTheme}/>
+                  <Icon url={item.Url} icon={item.Icon} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
                   <Title url={item.Url} title={item.Title}/>
                   <div className={`${styles.itemAction} ${classes.itemAction}`}>                 
                     <Button size="small" className={classes.button} onClick={handleDelete ( item.ID)}>Remove</Button>
@@ -118,8 +120,6 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
                 </div>
               ))}
         </div>
-        <p>Width {webpartWidth}</p>
-        <p>Page Name {pageFileName}</p>
       </FluentProvider>
       </IdPrefixProvider>
       <IdPrefixProvider value={`frv-quicklink-dialog-${props.instanceId}-`}>
@@ -173,7 +173,7 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
         <div className={classes.listSection}>
             {state.items.map((item) => (
                 <div className={classes.itemSection} key={item.ID}>
-                  <Icon url={item.Url} icon={item.Icon} isdarkmode={props.isDarkTheme}/>
+                  <Icon url={item.Url} icon={item.Icon} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
                   <Title url={item.Url} title={item.Title}/>
                 </div>
               ))}

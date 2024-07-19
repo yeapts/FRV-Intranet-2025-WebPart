@@ -5,13 +5,16 @@ import { readAllItems } from './UReadAllItems';
 interface Props {
   spHttpClient: SPHttpClient;
   absoluteUrl: string;
+  webpartTitle : string;
+  pageFileName: string;
+  webpartType: string;
 }
 
 const handleError = (error: Error): void => {  
   console.error(error);  // Log the error or send it to an error reporting service here
 };
 
-export const createItem = async (props:Props, title:string, url:string, webpart:string, page:string, setAddDialogIsOpen:React.Dispatch<React.SetStateAction<boolean>>, setState: React.Dispatch<React.SetStateAction<IState>>): Promise<void> => {
+export const createItem = async (props:Props, title:string, url:string, webpart:string, page:string, section:string, setAddDialogIsOpen:React.Dispatch<React.SetStateAction<boolean>>, setState: React.Dispatch<React.SetStateAction<IState>>): Promise<void> => {
   try {
   
     const body: string = JSON.stringify({  
@@ -20,6 +23,7 @@ export const createItem = async (props:Props, title:string, url:string, webpart:
       'Webpart': webpart,
       'Page' : page,
       'Sort': 0,
+      'Section' : section,
     }); 
 
     await props.spHttpClient.post(`${props.absoluteUrl}/_api/web/lists/getByTitle('QuickLinks')/items`, SPHttpClient.configurations.v1, {

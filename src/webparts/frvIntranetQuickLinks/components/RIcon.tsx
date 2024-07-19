@@ -7,12 +7,22 @@ interface Props {
   url: string | undefined;
   icon: string | undefined;
   isdarkmode: boolean;
+  webpartType: string;
   }
 
 
-  const Icon = ({ url, icon, isdarkmode }: Props): JSX.Element => {
+  const Icon = ({ url, icon, isdarkmode, webpartType }: Props): JSX.Element => {
     const classes = useStyles ();
-    const currentIconCell =  isdarkmode ? classes.iconCellDark : classes.iconCell;
+    
+    let currentIconCell ;
+
+    if(webpartType==="Applications"){
+       currentIconCell =  classes.iconRedCell ;
+    }else if (isdarkmode) {
+     currentIconCell =  classes.iconCellDark ;
+    }else {
+       currentIconCell =  classes.iconCell;
+    }
 
     if (icon) {
       return (

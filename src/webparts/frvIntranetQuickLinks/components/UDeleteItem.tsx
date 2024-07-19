@@ -6,6 +6,9 @@ import { IState } from './IState';
 interface Props {
   absoluteUrl: string;
   spHttpClient: SPHttpClient;
+  webpartTitle : string;
+  pageFileName: string;
+  webpartType: string;
 }
 
 const handleError = (error: Error): void => {  

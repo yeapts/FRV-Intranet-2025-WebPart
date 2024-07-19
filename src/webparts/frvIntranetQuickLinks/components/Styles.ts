@@ -1,7 +1,11 @@
 import { makeStyles, shorthands } from "@fluentui/react-components";
 
 export const useStyles = makeStyles({  
-iconCell:{
+  iconRedCell:{
+    maxWidth: "110px",
+    backgroundColor: '#D6001C',
+  },
+  iconCell:{
   maxWidth: "110px",
   backgroundColor: '#0c2340',
 },

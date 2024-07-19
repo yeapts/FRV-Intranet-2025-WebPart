@@ -4,10 +4,13 @@ import { Item } from './IItem';
 interface Props {
   absoluteUrl: string;
   spHttpClient: SPHttpClient;
+  webpartTitle : string;
+  pageFileName: string;
+  webpartType: string;
 }
 
 export const getAllItems = async (props: Props): Promise<Item[]> => {
-  const endpoint = `${props.absoluteUrl}/_api/web/lists/GetByTitle('QuickLinks')/Items?$select=ID,Title,Sort,Url,Section,Image,Webpart,Page,Icon&$orderby=Sort asc`;
+  const endpoint = `${props.absoluteUrl}/_api/web/lists/GetByTitle('QuickLinks')/Items?$select=ID,Title,Sort,Url,Section,Image,Webpart,Page,Icon&$orderby=Sort asc&$filter=Section eq '${props.webpartTitle}'`;
 
   try {
     const response: SPHttpClientResponse = await props.spHttpClient.get(endpoint, SPHttpClient.configurations.v1);
