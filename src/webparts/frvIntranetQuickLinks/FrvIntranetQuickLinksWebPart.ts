@@ -144,11 +144,15 @@ export default class FrvIntranetQuickLinksWebPart extends BaseClientSideWebPart<
                     text: 'News'
                   },
                   {
-                    key: 'IWantTos',
+                    key: 'I Want To',
                     text: 'I Want To'
                   },
                   {
-                    key: 'ExternalWebsites',
+                    key: 'Sites',
+                    text: 'Sites'
+                  },
+                  {
+                    key: 'External Websites',
                     text: 'External Websites'
                   },
                   {

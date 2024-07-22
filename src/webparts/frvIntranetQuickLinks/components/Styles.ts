@@ -3,43 +3,89 @@ import { makeStyles, shorthands } from "@fluentui/react-components";
 export const useStyles = makeStyles({  
   iconRedCell:{
     maxWidth: "110px",
+    maxHeight: "110px",
+    overflow: "hidden",
     backgroundColor: '#D6001C',
   },
   iconCell:{
-  maxWidth: "110px",
-  backgroundColor: '#0c2340',
-},
-iconCellDark:{
-  maxWidth: "110px",
-  backgroundColor: '#3A597F',
-},
+    maxWidth: "110px",
+    maxHeight: "110px",
+    overflow: "hidden",
+  },
+  iconBlueCell:{
+    maxWidth: "110px",
+    maxHeight: "110px",
+    overflow: "hidden",
+    backgroundColor: '#0c2340',
+    },
+  iconCellDark:{
+    maxWidth: "110px",
+    maxHeight: "110px",
+    overflow: "hidden",
+    backgroundColor: '#3A597F',
+  },
+  iconYellowCell:{
+    maxWidth: "110px",
+    maxHeight: "110px",
+    overflow: "hidden",
+    backgroundColor: '#FFC845',
+  },
+  iconOrangeCell:{
+    maxWidth: "110px",
+    maxHeight: "110px",
+    overflow: "hidden",
+    backgroundColor: '#FF7500',
+  },
+  iconWhiteCell:{
+    maxWidth: "110px",
+    maxHeight: "110px",
+    overflow: "hidden",
+    backgroundColor: '#FFFFFF',
+  },
+  iconGreenCell:{
+    maxWidth: "110px",
+    maxHeight: "110px",
+    overflow: "hidden",
+    backgroundColor: '#1a6d09',
+  },
+  iconGrayCell:{
+    maxWidth: "110px",
+    maxHeight: "110px",
+    overflow: "hidden",
+    backgroundColor: '#818181',
+  },
 
-iconCellTitle:{
-  maxWidth: "110px",
-},
 
-listSection :{
-  marginTop: "5px",
-  marginBottom: "15px",
-  display:"flex",
-  flexDirection:"row",
-  gap: "10px",
-  flexWrap:"wrap",
-  position:'relative',
+  iconCellTitle:{
+    maxWidth: "110px",
+    overflow: "hidden",
+    marginTop:"5px",
+  },
 
-},
-iconImage:{
-width:'100%',
-filter:  'invert(98%) sepia(98%) saturate(7%) hue-rotate(155deg) brightness(102%) contrast(106%)',
+  listSection :{
+    marginTop: "5px",
+    marginBottom: "15px",
+    display:"flex",
+    flexDirection:"row",
+    gap: "10px",
+    flexWrap:"wrap",
+    position:'relative',
 
-padding: "10px",
-},
+  },
 
+  iconThumbnail:{
+    width:'100%', 
+  },
 
-iconImageDark:{
-  width:'100%',
-  
-  padding: "10px",
+  iconImage:{
+    width:'100%',
+    filter:  'invert(98%) sepia(98%) saturate(7%) hue-rotate(155deg) brightness(102%) contrast(106%)',
+    padding: "10px",
+  },
+
+  iconImageDark:{
+    width:'100%',  
+    padding: "10px",
   },
 
 itemDetail:{

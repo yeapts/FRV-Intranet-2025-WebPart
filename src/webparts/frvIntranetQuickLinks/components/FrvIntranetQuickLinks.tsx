@@ -112,7 +112,7 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
         <div className={classes.listSection}>
             {state.items.map((item) => (
                 <div className={`${styles.quicklinkSection} ${classes.itemDetail}`} key={item.ID}>
-                  <Icon url={item.Url} icon={item.Icon} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
+                  <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
                   <Title url={item.Url} title={item.Title}/>
                   <div className={`${styles.itemAction} ${classes.itemAction}`}>                 
                     <Button size="small" className={classes.button} onClick={handleDelete ( item.ID)}>Remove</Button>
@@ -173,7 +173,7 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
         <div className={classes.listSection}>
             {state.items.map((item) => (
                 <div className={classes.itemSection} key={item.ID}>
-                  <Icon url={item.Url} icon={item.Icon} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
+                  <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
                   <Title url={item.Url} title={item.Title}/>
                 </div>
               ))}
