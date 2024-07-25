@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, Tooltip,   } from "@fluentui/react-components";
+import { Text,    } from "@fluentui/react-components";
 import { useStyles } from './Styles';
 //import { customLightTheme } from './Theme';
 
@@ -10,18 +10,16 @@ interface Props {
   
   const UserTitle = ({ usertitle, nametitle }: Props): JSX.Element => {
     const classes = useStyles();
-    const tooltipContent = usertitle ?? nametitle;  
+    //const tooltipContent = usertitle ?? nametitle;  
+    //        <Tooltip appearance="inverted" positioning="above-start" content={tooltipContent} relationship="label">
+    //        </Tooltip>
     if (usertitle !== null) {    
       return (
-        <Tooltip appearance="inverted" positioning="above-start" content={tooltipContent} relationship="label">
-          <Text className={classes.textStyle} truncate wrap={false} size={200}>{usertitle}</Text>   
-        </Tooltip>
+          <Text className={classes.textStyle} truncate wrap={true} weight="medium" size={200}>{usertitle}</Text>   
       );
     } else {
       return (   
-        <Tooltip  appearance="inverted" positioning="above-start" content={tooltipContent} relationship="label">
-          <Text className={classes.textStyle} truncate wrap={false} size={200}>{nametitle}</Text> 
-        </Tooltip>
+          <Text className={classes.textStyle} truncate wrap={true} weight="medium" size={200}>{nametitle}</Text> 
       );
     }
   };

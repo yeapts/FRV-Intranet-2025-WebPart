@@ -33,6 +33,12 @@ export const useStyles = makeStyles({
       marginTop: "5px",
       marginBottom: "15px",
       display:"flex",
+      position:'relative',
+    },
+    contactSectionHoverEffect:{
+      marginTop: "5px",
+      marginBottom: "15px",
+      display:"flex",
       '&:hover': {
         backgroundColor: '#a1a1a133',
       },

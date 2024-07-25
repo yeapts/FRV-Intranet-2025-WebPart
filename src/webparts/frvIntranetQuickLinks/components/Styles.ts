@@ -2,62 +2,62 @@ import { makeStyles, shorthands } from "@fluentui/react-components";
 
 export const useStyles = makeStyles({  
   iconRedCell:{
-    maxWidth: "110px",
-    maxHeight: "110px",
+    maxWidth: "100px",
+    maxHeight: "100px",
     overflow: "hidden",
     backgroundColor: '#D6001C',
   },
   iconCell:{
-    maxWidth: "110px",
-    maxHeight: "110px",
+    maxWidth: "100px",
+    maxHeight: "100px",
     overflow: "hidden",
   },
   iconBlueCell:{
-    maxWidth: "110px",
-    maxHeight: "110px",
+    maxWidth: "100px",
+    maxHeight: "100px",
     overflow: "hidden",
     backgroundColor: '#0c2340',
     },
   iconCellDark:{
-    maxWidth: "110px",
-    maxHeight: "110px",
+    maxWidth: "100px",
+    maxHeight: "100px",
     overflow: "hidden",
     backgroundColor: '#3A597F',
   },
   iconYellowCell:{
-    maxWidth: "110px",
-    maxHeight: "110px",
+    maxWidth: "100px",
+    maxHeight: "100px",
     overflow: "hidden",
     backgroundColor: '#FFC845',
   },
   iconOrangeCell:{
-    maxWidth: "110px",
-    maxHeight: "110px",
+    maxWidth: "100px",
+    maxHeight: "100px",
     overflow: "hidden",
     backgroundColor: '#FF7500',
   },
   iconWhiteCell:{
-    maxWidth: "110px",
-    maxHeight: "110px",
+    maxWidth: "100px",
+    maxHeight: "100px",
     overflow: "hidden",
     backgroundColor: '#FFFFFF',
   },
   iconGreenCell:{
-    maxWidth: "110px",
-    maxHeight: "110px",
+    maxWidth: "100px",
+    maxHeight: "100px",
     overflow: "hidden",
     backgroundColor: '#1a6d09',
   },
   iconGrayCell:{
-    maxWidth: "110px",
-    maxHeight: "110px",
+    maxWidth: "100px",
+    maxHeight: "100px",
     overflow: "hidden",
     backgroundColor: '#818181',
   },
 
 
   iconCellTitle:{
-    maxWidth: "110px",
+    maxWidth: "100px",
     overflow: "hidden",
     marginTop:"5px",
   },
@@ -67,10 +67,10 @@ export const useStyles = makeStyles({
     marginBottom: "15px",
     display:"flex",
     flexDirection:"row",
-    gap: "10px",
+    rowGap: "15px",
     flexWrap:"wrap",
     position:'relative',
-
+    columnGap: "32px",
   },
 
   iconThumbnail:{

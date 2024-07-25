@@ -14,7 +14,7 @@ interface Props {
       return (
         <div className={classes.iconCellTitle}>
           <a href={url}>
-            <Text align="center" size={300} weight="medium" className={classes.textStyle} truncate wrap={true}>{title}</Text> 
+            <Text align="center" size={300} weight="regular" className={classes.textStyle} truncate wrap={true}>{title}</Text> 
           </a>
         </div>
       );

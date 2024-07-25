@@ -166,13 +166,13 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
     );
   } else{
     return (
-      <section className={styles.section}>
+      <section className={styles.links}>
         <IdPrefixProvider value={`frv-quicklinks-${props.instanceId}-`}>
         <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
         <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
         <div className={classes.listSection}>
             {state.items.map((item) => (
-                <div className={classes.itemSection} key={item.ID}>
+                <div className={`${styles.quicklinkSection} ${classes.itemDetail}`} key={item.ID}>
                   <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
                   <Title url={item.Url} title={item.Title}/>
                 </div>

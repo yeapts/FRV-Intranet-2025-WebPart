@@ -23,9 +23,13 @@ interface Props {
     }else if(webpartType==="I Want To"){
       currentIconCell =  classes.iconGreenCell ;
     }else if(webpartType==="Documents"){
-      currentIconCell =  classes.iconCell ;
+      if (isdarkmode) {
+        currentIconCell =  classes.iconCellDark ;
+       }else {
+          currentIconCell =  classes.iconBlueCell;
+       }
     }else if(webpartType==="Topics"){
-      currentIconCell =  classes.iconYellowCell ;
+      currentIconCell =  classes.iconOrangeCell ;
     }else if(webpartType==="Sites"){
       if (isdarkmode) {
         currentIconCell =  classes.iconCellDark ;
@@ -33,9 +37,9 @@ interface Props {
           currentIconCell =  classes.iconBlueCell;
        }
     }else if(webpartType==="News"){
-    currentIconCell =  classes.iconOrangeCell ;
+      currentIconCell =  classes.iconYellowCell ;
     }else if(webpartType==="External Websites"){
-    currentIconCell =  classes.iconGrayCell ;
+      currentIconCell =  classes.iconGrayCell ;
     }else if (isdarkmode) {
      currentIconCell =  classes.iconCellDark ;
     }else {
