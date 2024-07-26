@@ -1,76 +1,115 @@
 import { makeStyles, shorthands } from "@fluentui/react-components";
 
 export const useStyles = makeStyles({  
+  iconCellHover:{
+    display: "flex",
+    maxWidth: "114px",
+    minHeight: "114px",
+
+  },
   iconRedCell:{
-    maxWidth: "100px",
-    maxHeight: "100px",
+    maxWidth: "114px",
+    minHeight: "114px",
     overflow: "hidden",
     backgroundColor: '#D6001C',
-  },
-  iconCell:{
-    maxWidth: "100px",
-    maxHeight: "100px",
-    overflow: "hidden",
+    display: 'flex',
+    flexDirection: 'column',  
+    position: 'relative',
+    '&:hover': {
+      backgroundColor: '#D6001Cde',
+    },
   },
   iconBlueCell:{
-    maxWidth: "100px",
-    maxHeight: "100px",
+    maxWidth: "114px",
+    minHeight: "114px",
     overflow: "hidden",
     backgroundColor: '#0c2340',
+    display: 'flex',
+    flexDirection: 'column',  
+    position: 'relative',
+    '&:hover': {
+      backgroundColor: '#0c2340de',
     },
+  },
   iconCellDark:{
-    maxWidth: "100px",
-    maxHeight: "100px",
+    maxWidth: "114px",
+    minHeight: "114px",
     overflow: "hidden",
     backgroundColor: '#3A597F',
+    display: 'flex',
+    flexDirection: 'column',  
+    position: 'relative',
+    '&:hover': {
+      backgroundColor: '#3A597Fde',
+    },
   },
   iconYellowCell:{
-    maxWidth: "100px",
-    maxHeight: "100px",
+    maxWidth: "114px",
+    minHeight: "114px",
     overflow: "hidden",
     backgroundColor: '#FFC845',
+    display: 'flex',
+    flexDirection: 'column',  
+    position: 'relative',
+    '&:hover': {
+      backgroundColor: '#FFC845de',
+    },
   },
   iconOrangeCell:{
-    maxWidth: "100px",
-    maxHeight: "100px",
+    maxWidth: "114px",
+    minHeight: "114px",
     overflow: "hidden",
     backgroundColor: '#FF7500',
-  },
-  iconWhiteCell:{
-    maxWidth: "100px",
-    maxHeight: "100px",
-    overflow: "hidden",
-    backgroundColor: '#FFFFFF',
+    display: 'flex',
+    flexDirection: 'column',  
+    position: 'relative',
+    '&:hover': {
+      backgroundColor: '#FF7500de',
+    },
   },
   iconGreenCell:{
-    maxWidth: "100px",
-    maxHeight: "100px",
+    maxWidth: "114px",
+    minHeight: "114px",
     overflow: "hidden",
     backgroundColor: '#1a6d09',
+    display: 'flex',
+    flexDirection: 'column',  
+    position: 'relative',
+    '&:hover': {
+      backgroundColor: '#1a6d09de',
+    },
   },
   iconGrayCell:{
-    maxWidth: "100px",
-    maxHeight: "100px",
+    maxWidth: "114px",
+    minHeight: "114px",
     overflow: "hidden",
     backgroundColor: '#818181',
+    display: 'flex',
+    flexDirection: 'column',  
+    position: 'relative',
+    '&:hover': {
+      backgroundColor: '#818181de',
+    },
   },
 
-
   iconCellTitle:{
-    maxWidth: "100px",
     overflow: "hidden",
-    marginTop:"5px",
+    paddingBotton: "10px",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    paddingBottom: "10px",
+    textDecoration: "none",
   },
 
   listSection :{
-    marginTop: "5px",
-    marginBottom: "15px",
+    marginTop: "0px",
+    marginBottom: "0px",
     display:"flex",
     flexDirection:"row",
-    rowGap: "15px",
+    rowGap: "10px",
     flexWrap:"wrap",
     position:'relative',
-    columnGap: "32px",
+    columnGap: "10px",
   },
 
   iconThumbnail:{
@@ -78,9 +117,11 @@ export const useStyles = makeStyles({
   },
 
   iconImage:{
-    width:'100%',
-    filter:  'invert(98%) sepia(98%) saturate(7%) hue-rotate(155deg) brightness(102%) contrast(106%)',
-    padding: "10px",
+    width:'65%',   
+    paddingTop: "10px", 
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    paddingBottom: "10px",
   },
 
   iconImageDark:{
@@ -91,13 +132,11 @@ export const useStyles = makeStyles({
 itemDetail:{
   display: 'flex',
   flexDirection: 'column',  
-  textAlign: 'left',
+  textAlign: 'center',
   alignContent: 'center',
   position: 'relative',
-  maxWidth: '300px',  
-  '&:hover': {
-    backgroundColor: '#a1a1a133',
-  },
+  maxWidth: '400px',  
+
 },
 
 itemAction: {
@@ -113,10 +152,10 @@ itemAction: {
     //color: 'var(--bodyText)',
   },
   textStyle:{
-    //backgroundColor: 'var(--bodyBackground)',
-    //color: 'var(--bodyText)',
+    color: 'white',
     overflow: "hidden",
     display: "block",
+
   },
   fluentProvider:{
     backgroundColor: '#ffffff00',
@@ -135,9 +174,6 @@ itemAction: {
     itemSection:{
       margin: "5px",
       maxWidth: "300px",
-      '&:hover': {
-        backgroundColor: '#a1a1a133',
-      },
     },
     contactSection:{
       marginTop: "5px",

@@ -99,24 +99,58 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
 
  const currentTheme = props.isDarkTheme ? customQuickLinksTheme : customLightTheme;
 
+ let currentIconCell:string ;
+
+ if(webpartType==="Applications"){
+    currentIconCell =  classes.iconRedCell ;
+ }else if(webpartType==="I Want To"){
+   currentIconCell =  classes.iconGreenCell ;
+ }else if(webpartType==="Documents"){
+   if (props.isDarkTheme) {
+     currentIconCell =  classes.iconCellDark ;
+    }else {
+       currentIconCell =  classes.iconBlueCell;
+    }
+ }else if(webpartType==="Topics"){
+   currentIconCell =  classes.iconOrangeCell ;
+ }else if(webpartType==="Sites"){
+   if (props.isDarkTheme) {
+     currentIconCell =  classes.iconCellDark ;
+    }else {
+       currentIconCell =  classes.iconBlueCell;
+    }
+ }else if(webpartType==="News"){
+   currentIconCell =  classes.iconYellowCell ;
+ }else if(webpartType==="External Websites"){
+   currentIconCell =  classes.iconGrayCell ;
+ }else if (props.isDarkTheme) {
+  currentIconCell =  classes.iconCellDark ;
+ }else {
+    currentIconCell =  classes.iconBlueCell;
+ }
+
   if (isEditor === true) 
     {
     return (
       <section className={styles.links}>
         <IdPrefixProvider value={`frv-quicklinks-${props.instanceId}-`}>
         <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
-        <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
+        <h3 >{(webpartTitle)}</h3>
         <div className={classes.listAction}>
             <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Link</Button>
-          </div>
+        </div>
         <div className={classes.listSection}>
             {state.items.map((item) => (
-                <div className={`${styles.quicklinkSection} ${classes.itemDetail}`} key={item.ID}>
-                  <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
-                  <Title url={item.Url} title={item.Title}/>
-                  <div className={`${styles.itemAction} ${classes.itemAction}`}>                 
-                    <Button size="small" className={classes.button} onClick={handleDelete ( item.ID)}>Remove</Button>
-                  </div>   
+                <div className={`${styles.quicklinkSection}`} key={item.ID}>            
+                    <div className={currentIconCell}>
+                      <div className={classes.itemDetail}>  
+                        <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
+                        <Title url={item.Url} title={item.Title}/>
+                      </div> 
+                      <div className={`${styles.itemAction} ${classes.itemAction}`}>                 
+                        <Button size="small" className={classes.button} onClick={handleDelete ( item.ID)}>Remove</Button>
+                      </div>  
+                    </div>
                 </div>
               ))}
         </div>
