@@ -98,7 +98,6 @@ export const useStyles = makeStyles({
     paddingLeft: "10px",
     paddingRight: "10px",
     paddingBottom: "10px",
-    textDecoration: "none",
   },
 
   listSection :{
@@ -233,9 +232,10 @@ itemAction: {
     },
 
     button:{
-      backgroundColor: 'var(--bodyBackground)',
-      color: 'var(--bodyText)',
+      backgroundColor: 'white',
+      color: 'black',
       minWidth: 'fit-content',
+      padding: '7px',
     },
     listAction:{
       marginBlockEnd: '1em',

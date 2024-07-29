@@ -14,7 +14,7 @@ import {  Button ,  Dialog,
    IdPrefixProvider,
    FluentProvider,
    } from '@fluentui/react-components';
-import { PersonEditRegular, AddRegular} from "@fluentui/react-icons";
+import { PersonEditRegular, AddRegular, DeleteRegular} from "@fluentui/react-icons";
 import { useStyles } from './Styles';
 import { customDarkTheme, customLightTheme } from '../../frvIntranet2025WebPart/components/Theme';
 
@@ -123,7 +123,7 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
                 <PersonEditRegular className={classes.itemIcon} />
                 <Text className={classes.itemTitle} truncate wrap={false}>{item.Title}</Text>
                 <div className={`${styles.itemAction} ${classes.itemAction}`}>
-                <Button size="small" className={classes.button} onClick={handleDelete(DeleteItem, item.Id)}>Remove</Button>
+                <Button size="large" className={classes.button} onClick={handleDelete(DeleteItem, item.Id)}><DeleteRegular/></Button>
                 </div>
               </div>
             ))}

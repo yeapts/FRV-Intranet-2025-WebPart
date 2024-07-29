@@ -10,7 +10,7 @@ import UserPhone from './RUserPhone';
 import UserEmail from './RUserEmail';
 import { useStyles } from './Styles';
 import { Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, IdPrefixProvider, Input, Image} from '@fluentui/react-components';
-import { AddRegular} from "@fluentui/react-icons";
+import { AddRegular, DeleteRegular} from "@fluentui/react-icons";
 import { customDarkTheme, customLightTheme } from '../../frvIntranet2025WebPart/components/Theme';
 import { readAllItems } from './UReadAllItems';
 import DeleteItem from './UDeleteItem';
@@ -102,7 +102,7 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
                     <UserEmail useremail={item.Name.EMail} />
                   </div>
                   <div className={`${styles.itemAction} ${classes.itemAction}`}>                 
-                    <Button size="small" className={classes.button} onClick={handleDelete ( item.ID)}>Remove</Button>
+                    <Button size="large" className={classes.button} onClick={handleDelete ( item.ID)}><DeleteRegular/></Button>
                   </div>   
                 </div>
               ))}

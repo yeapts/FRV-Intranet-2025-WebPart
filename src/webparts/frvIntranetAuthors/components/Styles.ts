@@ -12,9 +12,10 @@ export const useStyles = makeStyles({
     backgroundColor: '#ffffff00',
   },
   button:{
-    backgroundColor: 'var(--bodyBackground)',
-    color: 'var(--bodyText)',
+    backgroundColor: 'white',
+    color: 'black',
     minWidth: 'fit-content',
+    padding: '7px',
   },
   listAction:{
     marginBlockEnd: '1em',
@@ -29,6 +30,7 @@ export const useStyles = makeStyles({
     alignContent: 'center',
     paddingRight: '0.25em',
     color: 'var(--bodyText)',
+    height: '32px',
   },
   itemAction: {
     alignContent: 'center',

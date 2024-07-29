@@ -102,9 +102,10 @@ export const useStyles = makeStyles({
     },
 
     button:{
-      backgroundColor: 'var(--bodyBackground)',
-      color: 'var(--bodyText)',
+      backgroundColor: 'white',
+      color: 'black',
       minWidth: 'fit-content',
+      padding: '7px',
     },
     listAction:{
       marginBlockEnd: '1em',

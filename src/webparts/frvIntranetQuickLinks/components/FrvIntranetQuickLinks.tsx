@@ -4,13 +4,14 @@ import type { IFrvIntranetQuickLinksProps } from './IFrvIntranetQuickLinksProps'
 import { useStyles } from './Styles';
 import { IState } from './IState'; 
 import { readAllItems } from './UReadAllItems';
-import {  customLightTheme } from '../../frvIntranet2025WebPart/components/Theme';
-import {Text, Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, IdPrefixProvider, Input, InputProps, Theme, webDarkTheme } from '@fluentui/react-components';
+import { customLightTheme } from '../../frvIntranet2025WebPart/components/Theme';
+import { Text, Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, IdPrefixProvider, Input, InputProps, Theme, webDarkTheme } from '@fluentui/react-components';
+import { AddRegular, DeleteRegular, EditRegular, ImageEditRegular } from '@fluentui/react-icons';
+import { createItem } from './UCreateItem';
 import Icon from './RIcon';
 import Title from './RTitle';
-import { AddRegular } from '@fluentui/react-icons';
-import { createItem } from './UCreateItem';
 import DeleteItem from './UDeleteItem';
+import { editItem } from './UEditItem';
 
 const handleError = (error: Error): void => {  
   console.error(error);  // Log the error or send it to an error reporting service here
@@ -32,47 +33,40 @@ const customQuickLinksTheme: Theme = {
 
 const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => {
   const [state, setState] = React.useState<IState>({ items: [], status: '', });
-  const { webpartTitle, isEditor,  pageFileName, webpartType } = props;
+  const {webpartTitle, isEditor,  pageFileName, webpartType } = props;
   const [isAddDialogOpen, setAddDialogIsOpen] = React.useState(false);
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isEditDialogOpen, setEditDialogIsOpen] = React.useState(false);
   const [URLvalue, setURLValue] = React.useState("https://");
   const [URLvalueError, setURLValueError] = React.useState("");
+  const [itemID, setItemID] = React.useState<number | 0>(0);
   const classes = useStyles ();
 
   const handleOpenAddDialog = ():void => {
     setAddDialogIsOpen(true);
   };
-  const addDialog = (): void => {
-    handleOpenAddDialog();
-  }
   const handleCloseAddDialog = ():void => {
     setAddDialogIsOpen(false);
     setURLValue ("https://");
   };
 
-  const handleClose = ():void => {
-    setIsOpen(false);
+  const handleOpenEditDialog = (itemID: number):void => {
+    setItemID(itemID);
+    setEditDialogIsOpen(true);
+  };
+  const handleCloseEditDialog = ():void => {
+    setEditDialogIsOpen(false);
   };
 
   const handleReadAllItems = async (): Promise<void> => {
     await readAllItems(props, setState);
   };
-  const handleDelete = ( id: number): (() => Promise<void>) => async () => {
-    try {
-      await DeleteItem( props, setState, id);
-    } catch (error) {
-      handleError(error);
-      console.log(`Error deleting item: ${error}`);
-    }
-  };
+
   const handleCreateItem = async (): Promise<void> => {
     const inputTitle = document.getElementById('inputTitle')as HTMLInputElement; 
     if (!inputTitle) {
       console.error('Input element "Title" not found');
       return;
-    }
-    
-  
+    }  
     try {
       await createItem(props, inputTitle.value , URLvalue, webpartType , pageFileName , webpartTitle, setAddDialogIsOpen, setState);
       setURLValue ("https://");
@@ -82,141 +76,157 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
     }
   };
 
+  const handleDeleteItem = ( id: number): (() => Promise<void>) => async () => {
+    try {
+      await DeleteItem( props, setState, id);
+    } catch (error) {
+      handleError(error);
+      console.log(`Error deleting item: ${error}`);
+    }
+  };
+
+  const handleEditItem = ( id: number): (() => Promise<void>) => async () => {
+    const inputTitle = document.getElementById('inputTitle')as HTMLInputElement; 
+    if (!inputTitle) {
+      console.error('Input element "Title" not found');
+      return;
+    }  
+    try {
+      await editItem( props, id, inputTitle.value , URLvalue, webpartType , pageFileName , webpartTitle, setAddDialogIsOpen, setState );
+    } catch (error) {
+      handleError(error);
+      console.log(`Error Edit item: ${error}`);
+    }
+    setEditDialogIsOpen(false);
+  };
+
   React.useEffect(() => {
     handleReadAllItems().catch(handleError);
   }, []);
 
   const onChange: InputProps["onChange"] = (ev, data) => {
-    // The controlled input pattern can be used for other purposes besides validation,
-    // but validation is a useful example
-    if (data.value.search("https://") === -1) {
-      setURLValueError("Incorrect URL");
-    }else{
-      setURLValueError("Correct URL");
-    }
+    const isValid = data.value.search("https://");
+    setURLValueError(isValid ? "Correct URL" : "Incorrect URL");
     setURLValue(data.value);
   };
 
  const currentTheme = props.isDarkTheme ? customQuickLinksTheme : customLightTheme;
 
- let currentIconCell:string ;
+ const getIconCellClass = (): string => {
+  switch (webpartType) {
+    case "Applications":
+      return classes.iconRedCell;
+    case "I Want To":
+      return classes.iconGreenCell;
+    case "Documents":
+    case "Sites":
+      return props.isDarkTheme ? classes.iconCellDark : classes.iconBlueCell;
+    case "Topics":
+      return classes.iconOrangeCell;
+    case "News":
+      return classes.iconYellowCell;
+    case "External Websites":
+      return classes.iconGrayCell;
+    default:
+      return props.isDarkTheme ? classes.iconCellDark : classes.iconBlueCell;
+  }
+};
 
- if(webpartType==="Applications"){
-    currentIconCell =  classes.iconRedCell ;
- }else if(webpartType==="I Want To"){
-   currentIconCell =  classes.iconGreenCell ;
- }else if(webpartType==="Documents"){
-   if (props.isDarkTheme) {
-     currentIconCell =  classes.iconCellDark ;
-    }else {
-       currentIconCell =  classes.iconBlueCell;
-    }
- }else if(webpartType==="Topics"){
-   currentIconCell =  classes.iconOrangeCell ;
- }else if(webpartType==="Sites"){
-   if (props.isDarkTheme) {
-     currentIconCell =  classes.iconCellDark ;
-    }else {
-       currentIconCell =  classes.iconBlueCell;
-    }
- }else if(webpartType==="News"){
-   currentIconCell =  classes.iconYellowCell ;
- }else if(webpartType==="External Websites"){
-   currentIconCell =  classes.iconGrayCell ;
- }else if (props.isDarkTheme) {
-  currentIconCell =  classes.iconCellDark ;
- }else {
-    currentIconCell =  classes.iconBlueCell;
- }
+const currentIconCell = getIconCellClass();
 
-  if (isEditor === true) 
-    {
-    return (
-      <section className={styles.links}>
-        <IdPrefixProvider value={`frv-quicklinks-${props.instanceId}-`}>
-        <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
-        <h3 >{(webpartTitle)}</h3>
+const renderEditorView = (): JSX.Element => (
+  <section className={styles.links}>
+    <IdPrefixProvider value={`frv-quicklinks-${props.instanceId}-`}>
+      <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
+        <h3>{webpartTitle}</h3>
         <div className={classes.listAction}>
-            <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Link</Button>
+          <Button size="small" icon={<AddRegular />} className={classes.button} appearance="subtle" onClick={handleOpenAddDialog}>Add Link</Button>
         </div>
         <div className={classes.listSection}>
-            {state.items.map((item) => (
-                <div className={`${styles.quicklinkSection}`} key={item.ID}>            
-                    <div className={currentIconCell}>
-                      <div className={classes.itemDetail}>  
-                        <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
-                        <Title url={item.Url} title={item.Title}/>
-                      </div> 
-                      <div className={`${styles.itemAction} ${classes.itemAction}`}>                 
-                        <Button size="small" className={classes.button} onClick={handleDelete ( item.ID)}>Remove</Button>
-                      </div>  
-                    </div>
+          {state.items.map((item) => (
+            <div className={`${styles.quicklinkSection}`} key={item.ID}>
+              <div className={currentIconCell}>
+                <div className={classes.itemDetail}>
+                  <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType} />
+                  <Title url={item.Url} title={item.Title} />
                 </div>
-              ))}
+                <div className={`${styles.itemAction} ${classes.itemAction}`}>
+                  <Button size="large" className={classes.button}><ImageEditRegular /></Button>
+                  <Button size="large" className={classes.button} onClick={() => handleOpenEditDialog(item.ID)}><EditRegular /></Button>
+                  <Button size="large" className={classes.button} onClick={() => handleDeleteItem(item.ID)}><DeleteRegular /></Button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </FluentProvider>
-      </IdPrefixProvider>
-      <IdPrefixProvider value={`frv-quicklink-dialog-${props.instanceId}-`}>
-        <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>
-          <Dialog open={isAddDialogOpen} onOpenChange={handleCloseAddDialog} >
-              <DialogSurface className={classes.dialogSurface}>
-                <DialogBody>
-                  <DialogTitle className={classes.inputField}>Add Quick Link</DialogTitle>
-                  <DialogContent className={classes.dialogContent}>
-                    <Field label="Title" hint="Enter display title" className={classes.inputField}/>
-                    <Input type="text" id="inputTitle" className={classes.inputField}/>
-                    <Field label="URL" hint="Enter webpage or document's URL" className={classes.inputField}/>
-                    <Input type="url" id="inputUrl" onChange={onChange} value={URLvalue} className={classes.inputField}/>    
-                    <Text>{URLvalueError}</Text>                
-                  </DialogContent>
-                  <DialogActions>
-                    <Button appearance="primary"  onClick={()=>handleCreateItem()} >Add</Button>                  
-                    <DialogTrigger disableButtonEnhancement>
-                      <Button >Cancel</Button>
-                    </DialogTrigger>
-                  </DialogActions>
-                </DialogBody>
-              </DialogSurface>
-          </Dialog>
-          <Dialog open={isOpen} onOpenChange={handleClose} >
-              <DialogSurface >
-                <DialogBody>
-                  <DialogTitle>Delete</DialogTitle>
-                  <DialogContent >
-                    Are you sure you want to delete? 
-                  </DialogContent>
-                  <DialogActions>
-                    <Button appearance="primary">Delete</Button>
-                    <DialogTrigger disableButtonEnhancement>
-                      <Button >Cancel</Button>
-                    </DialogTrigger>
-                  </DialogActions>
-                </DialogBody>
-              </DialogSurface>
-          </Dialog>
-          </FluentProvider>
-        </IdPrefixProvider>
-      </section>
-    );
-  } else{
-    return (
-      <section className={styles.links}>
-        <IdPrefixProvider value={`frv-quicklinks-${props.instanceId}-`}>
-        <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
-        <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
-        <div className={classes.listSection}>
-            {state.items.map((item) => (
-                <div className={`${styles.quicklinkSection} ${classes.itemDetail}`} key={item.ID}>
-                  <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType}/>
-                  <Title url={item.Url} title={item.Title}/>
-                </div>
-              ))}
-          </div>
+    </IdPrefixProvider>
+    <IdPrefixProvider value={`frv-quicklink-dialog-${props.instanceId}-`}>
+      <FluentProvider theme={customLightTheme} className={classes.fluentProvider}>
+        <Dialog open={isAddDialogOpen} onOpenChange={handleCloseAddDialog}>
+          <DialogSurface className={classes.dialogSurface}>
+            <DialogBody>
+              <DialogTitle className={classes.inputField}>Add Quick Link</DialogTitle>
+              <DialogContent className={classes.dialogContent}>
+                <Field label="Title" hint="Enter display title" className={classes.inputField} />
+                <Input type="text" id="inputTitle" className={classes.inputField} />
+                <Field label="URL" hint="Enter webpage or document's URL" className={classes.inputField} />
+                <Input type="url" id="inputUrl" onChange={onChange} value={URLvalue} className={classes.inputField} />
+                <Text>{URLvalueError}</Text>
+              </DialogContent>
+              <DialogActions>
+                <Button appearance="primary" onClick={handleCreateItem}>Add</Button>
+                <DialogTrigger disableButtonEnhancement>
+                  <Button>Cancel</Button>
+                </DialogTrigger>
+              </DialogActions>
+            </DialogBody>
+          </DialogSurface>
+        </Dialog>
+        <Dialog open={isEditDialogOpen} onOpenChange={handleCloseEditDialog}>
+          <DialogSurface className={classes.dialogSurface}>
+            <DialogBody>
+              <DialogTitle className={classes.inputField}>Edit Quick Link</DialogTitle>
+              <DialogContent className={classes.dialogContent}>
+                <Field label="Title" hint="Enter display title" className={classes.inputField} />
+                <Input type="text" id="inputTitle" className={classes.inputField} />
+                <Field label="URL" hint="Enter webpage or document's URL" className={classes.inputField} />
+                <Input type="url" id="inputUrl" onChange={onChange} value={URLvalue} className={classes.inputField} />
+                <Text>{URLvalueError}</Text>
+              </DialogContent>
+              <DialogActions>
+                <Button appearance="primary" onClick={()=>handleEditItem(itemID)}>Update</Button>
+                <DialogTrigger disableButtonEnhancement>
+                  <Button>Cancel</Button>
+                </DialogTrigger>
+              </DialogActions>
+            </DialogBody>
+          </DialogSurface>
+        </Dialog>
       </FluentProvider>
-      </IdPrefixProvider>
-      </section>
-    );
-  }
-  }
+    </IdPrefixProvider>
+  </section>
+);
+
+const renderViewerView = (): JSX.Element => (
+  <section className={styles.links}>
+    <IdPrefixProvider value={`frv-quicklinks-${props.instanceId}-`}>
+      <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
+        <h3 className={classes.textStyle}>{webpartTitle}</h3>
+        <div className={classes.listSection}>
+          {state.items.map((item) => (
+            <div className={`${styles.quicklinkSection} ${classes.itemDetail}`} key={item.ID}>
+              <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType} />
+              <Title url={item.Url} title={item.Title} />
+            </div>
+          ))}
+        </div>
+      </FluentProvider>
+    </IdPrefixProvider>
+  </section>
+);
+
+return isEditor ? renderEditorView() : renderViewerView();
+};
 
 export default FrvIntranetQuickLinks;
