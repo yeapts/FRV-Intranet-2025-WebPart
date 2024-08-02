@@ -82,9 +82,9 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
         <section className={styles.section}>
         <IdPrefixProvider value={`frv-contact-${props.instanceId}-`}>
           <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
-          <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
-          <div className={classes.listAction}>
-            <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Contact</Button>
+          <div className={classes.webpartTitle}>{(webpartTitle)}</div>
+          <div >
+            <Button size="small" icon={<AddRegular />}  className={classes.actionButton} appearance="subtle" onClick={()=>addDialog()}>Add Contact</Button>
           </div>
           <div>
             {state.items.map((item) => (
@@ -158,7 +158,7 @@ const FrvIntranetContacts: React.FC<IFrvIntranetContactsProps> = (props) => {
         <section className={styles.section}>
           <IdPrefixProvider value={`frv-contact-${props.instanceId}-`}>
             <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
-              <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
+            <div className={classes.webpartTitle}>{webpartTitle}</div>
               <div>
                 {state.items.map((item) => (
                     <div className={classes.contactSection} key={item.ID}>

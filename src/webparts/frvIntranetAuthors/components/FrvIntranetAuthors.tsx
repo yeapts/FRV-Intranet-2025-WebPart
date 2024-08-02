@@ -112,12 +112,12 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
       <section className={styles.section}>
       <IdPrefixProvider value={`frv-authors-${props.instanceId}-`}>
       <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
-        <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
+        <div className={classes.webpartTitle}>{(webpartTitle)}</div>
         <div>
-          <div className={classes.listAction}>
-            <Button size="small" icon={<AddRegular />}  className={classes.button} appearance="subtle" onClick={()=>addDialog()}>Add Author</Button>
+          <div >
+            <Button size="small" icon={<AddRegular />}  className={classes.actionButton} appearance="subtle" onClick={()=>addDialog()}>Add Author</Button>
           </div>
-          <div>
+          <div >
             {state.items.map((item) => (
               <div className={`${styles.authorSection} ${classes.authorSection}`} key={item.Id} >
                 <PersonEditRegular className={classes.itemIcon} />
@@ -182,7 +182,7 @@ const FrvIntranetAuthors: React.FC<IFrvIntranetAuthorsProps> = (props) => {
     return (
       <section className={styles.section}>
 
-        <h3 className={classes.textStyle}>{(webpartTitle)}</h3>
+        <div className={classes.webpartTitle}>{webpartTitle}</div>
         <div>
             {state.items.map((item) => (
               <div key={item.Id} className={classes.list}>

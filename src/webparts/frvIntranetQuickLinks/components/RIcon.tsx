@@ -40,7 +40,7 @@ interface Props {
     } else {
       if (icon) {
         return (
-          <div >
+          <div className={classes.thumbnail}>
             <a href={url}>
               <Image className={classes.iconImage}  src={icon}/> 
             </a>
@@ -48,7 +48,7 @@ interface Props {
         );
       } else {
         return (  
-          <div >
+          <div className={classes.thumbnail}>
             <a href={url}>
               <Image className={classes.iconImage}  src={require('../assets/documents.svg')}/> 
             </a>

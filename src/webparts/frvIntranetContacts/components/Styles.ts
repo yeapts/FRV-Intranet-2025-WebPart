@@ -1,6 +1,13 @@
 import { makeStyles, shorthands } from "@fluentui/react-components";
 
 export const useStyles = makeStyles({  
+
+  webpartTitle:{
+    fontSize: '20px',
+    fontWeight: '600',
+    paddingBottom: '7px',
+  },
+
   webpartStyle:{
     //backgroundColor: 'var(--bodyBackground)',
     //color: 'var(--bodyText)',
@@ -30,6 +37,7 @@ export const useStyles = makeStyles({
       marginBottom: "5px",
     },
     contactSection:{
+      paddingTop: '7px',
       marginTop: "5px",
       marginBottom: "15px",
       display:"flex",
@@ -101,15 +109,27 @@ export const useStyles = makeStyles({
       height:"45px",
     },
 
+    actionButton:{
+      paddingLeft:'0px',
+      backgroundColor: 'var(--bodyBackground)',
+      color: 'var(--bodyText)',
+      minWidth: 'fit-content',
+      '&:hover': {
+        backgroundColor: 'var(--bodyBackground)',
+        color: 'var(--bodyText)',
+      },
+      '&:hover .fui-Button__icon': {
+        backgroundColor: 'var(--bodyBackground)',
+        color: 'var(--bodyText)',
+      },
+    },
     button:{
       backgroundColor: 'white',
       color: 'black',
       minWidth: 'fit-content',
       padding: '7px',
     },
-    listAction:{
-      marginBlockEnd: '1em',
-    },
+
     dialogSurface: {
       backgroundColor: 'white',
     },

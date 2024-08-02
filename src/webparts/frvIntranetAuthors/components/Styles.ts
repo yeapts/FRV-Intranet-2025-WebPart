@@ -1,6 +1,13 @@
 import { makeStyles, shorthands } from "@fluentui/react-components";
 
 export const useStyles = makeStyles({
+
+  webpartTitle:{
+    fontSize: '20px',
+    fontWeight: '600',
+    paddingBottom: '7px',
+  },
+
   webpartStyle:{
     //backgroundColor: 'var(--bodyBackground)',
     //color: 'var(--bodyText)',
@@ -11,15 +18,31 @@ export const useStyles = makeStyles({
   fluentProvider:{
     backgroundColor: '#ffffff00',
   },
+  actionSection:{
+    height: '18px',
+    paddingTop: '5px',
+  },
+  actionButton: {
+    paddingLeft:'0px',
+    backgroundColor: 'var(--bodyBackground)',
+    color: 'var(--bodyText)',
+    minWidth: 'fit-content',
+    '&:hover': {
+      backgroundColor: 'var(--bodyBackground)',
+      color: 'var(--bodyText)',
+    },
+    '&:hover .fui-Button__icon': {
+      backgroundColor: 'var(--bodyBackground)',
+      color: 'var(--bodyText)',
+    },
+  },
   button:{
     backgroundColor: 'white',
     color: 'black',
     minWidth: 'fit-content',
     padding: '7px',
   },
-  listAction:{
-    marginBlockEnd: '1em',
-  },
+
   itemTitle:{
     flexGrow: 8,
     textAlign: 'left',
@@ -44,7 +67,7 @@ export const useStyles = makeStyles({
   },
 
   authorSection:{
-    marginTop: "5px",
+    marginTop: "7px",
     marginBottom: "5px",
     flexDirection: 'row',
     flexWrap: 'nowrap',

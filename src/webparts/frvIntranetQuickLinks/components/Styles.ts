@@ -1,6 +1,13 @@
 import { makeStyles, shorthands } from "@fluentui/react-components";
 
 export const useStyles = makeStyles({  
+
+  webpartTitle:{
+    fontSize: '20px',
+    fontWeight: '600',
+    paddingBottom: '7px',
+  },
+
   iconCellHover:{
     display: "flex",
     maxWidth: "114px",
@@ -11,6 +18,7 @@ export const useStyles = makeStyles({
     maxWidth: "114px",
     minHeight: "114px",
     overflow: "hidden",
+    borderRadius: '4px',
     backgroundColor: '#D6001C',
     display: 'flex',
     flexDirection: 'column',  
@@ -23,6 +31,7 @@ export const useStyles = makeStyles({
     maxWidth: "114px",
     minHeight: "114px",
     overflow: "hidden",
+    borderRadius: '4px',
     backgroundColor: '#0c2340',
     display: 'flex',
     flexDirection: 'column',  
@@ -35,6 +44,7 @@ export const useStyles = makeStyles({
     maxWidth: "114px",
     minHeight: "114px",
     overflow: "hidden",
+    borderRadius: '4px',
     backgroundColor: '#3A597F',
     display: 'flex',
     flexDirection: 'column',  
@@ -47,6 +57,7 @@ export const useStyles = makeStyles({
     maxWidth: "114px",
     minHeight: "114px",
     overflow: "hidden",
+    borderRadius: '4px',
     backgroundColor: '#FFC845',
     display: 'flex',
     flexDirection: 'column',  
@@ -59,6 +70,7 @@ export const useStyles = makeStyles({
     maxWidth: "114px",
     minHeight: "114px",
     overflow: "hidden",
+    borderRadius: '4px',
     backgroundColor: '#FF7500',
     display: 'flex',
     flexDirection: 'column',  
@@ -71,6 +83,7 @@ export const useStyles = makeStyles({
     maxWidth: "114px",
     minHeight: "114px",
     overflow: "hidden",
+    borderRadius: '4px',
     backgroundColor: '#1a6d09',
     display: 'flex',
     flexDirection: 'column',  
@@ -83,6 +96,7 @@ export const useStyles = makeStyles({
     maxWidth: "114px",
     minHeight: "114px",
     overflow: "hidden",
+    borderRadius: '4px',
     backgroundColor: '#818181',
     display: 'flex',
     flexDirection: 'column',  
@@ -90,6 +104,11 @@ export const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: '#818181de',
     },
+  },
+
+  thumbnail:{
+    width: '100%',
+
   },
 
   iconCellTitle:{
@@ -101,6 +120,7 @@ export const useStyles = makeStyles({
   },
 
   listSection :{
+    paddingTop: '7px',
     marginTop: "0px",
     marginBottom: "0px",
     display:"flex",
@@ -116,11 +136,11 @@ export const useStyles = makeStyles({
   },
 
   iconImage:{
-    width:'65%',   
+    width:'60%',   
     paddingTop: "10px", 
     paddingLeft: "10px",
     paddingRight: "10px",
-    paddingBottom: "10px",
+    paddingBottom: "5px",
   },
 
   iconImageDark:{
@@ -173,6 +193,7 @@ itemAction: {
     itemSection:{
       margin: "5px",
       maxWidth: "300px",
+
     },
     contactSection:{
       marginTop: "5px",
@@ -230,16 +251,30 @@ itemAction: {
       width:"45px",
       height:"45px",
     },
-
+    actionSection:{
+      height: '18px',
+    },
+    actionButton:{
+      paddingLeft:'0px',
+      minWidth: 'fit-content',
+      backgroundColor: 'var(--bodyBackground)',
+      color: 'var(--bodyText)',
+      '&:hover': {
+        backgroundColor: 'var(--bodyBackground)',
+        color: 'var(--bodyText)',
+      },
+      '&:hover .fui-Button__icon': {
+        backgroundColor: 'var(--bodyBackground)',
+        color: 'var(--bodyText)',
+      },
+    },
     button:{
       backgroundColor: 'white',
       color: 'black',
       minWidth: 'fit-content',
       padding: '7px',
     },
-    listAction:{
-      marginBlockEnd: '1em',
-    },
+
     dialogSurface: {
       backgroundColor: 'white',
     },

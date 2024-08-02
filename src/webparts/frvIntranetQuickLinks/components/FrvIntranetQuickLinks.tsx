@@ -100,13 +100,17 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
     setEditDialogIsOpen(false);
   };
 
+  const handleCancelItem = (): (() => Promise<void>) => async () => {
+    setURLValue("https://");
+  };
+
   React.useEffect(() => {
     handleReadAllItems().catch(handleError);
   }, []);
 
   const onChange: InputProps["onChange"] = (ev, data) => {
     const isValid = data.value.search("https://");
-    setURLValueError(isValid ? "Correct URL" : "Incorrect URL");
+    setURLValueError(isValid ? "Incorrect URL" : "");
     setURLValue(data.value);
   };
 
@@ -138,9 +142,9 @@ const renderEditorView = (): JSX.Element => (
   <section className={styles.links}>
     <IdPrefixProvider value={`frv-quicklinks-${props.instanceId}-`}>
       <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
-        <h3>{webpartTitle}</h3>
-        <div className={classes.listAction}>
-          <Button size="small" icon={<AddRegular />} className={classes.button} appearance="subtle" onClick={handleOpenAddDialog}>Add Link</Button>
+        <div className={classes.webpartTitle}>{webpartTitle}</div>
+        <div >
+          <Button size="small" icon={<AddRegular />} className={classes.actionButton} appearance="subtle" onClick={handleOpenAddDialog}>Add Link</Button>
         </div>
         <div className={classes.listSection}>
           {state.items.map((item) => (
@@ -177,7 +181,7 @@ const renderEditorView = (): JSX.Element => (
               <DialogActions>
                 <Button appearance="primary" onClick={handleCreateItem}>Add</Button>
                 <DialogTrigger disableButtonEnhancement>
-                  <Button>Cancel</Button>
+                  <Button onClick={()=>handleCancelItem()}>Cancel</Button>
                 </DialogTrigger>
               </DialogActions>
             </DialogBody>
@@ -197,7 +201,7 @@ const renderEditorView = (): JSX.Element => (
               <DialogActions>
                 <Button appearance="primary" onClick={()=>handleEditItem(itemID)}>Update</Button>
                 <DialogTrigger disableButtonEnhancement>
-                  <Button>Cancel</Button>
+                  <Button onClick={()=>handleCancelItem()}>Cancel</Button>
                 </DialogTrigger>
               </DialogActions>
             </DialogBody>
@@ -212,12 +216,16 @@ const renderViewerView = (): JSX.Element => (
   <section className={styles.links}>
     <IdPrefixProvider value={`frv-quicklinks-${props.instanceId}-`}>
       <FluentProvider theme={currentTheme} className={classes.fluentProvider}>
-        <h3 className={classes.textStyle}>{webpartTitle}</h3>
+      <div className={classes.webpartTitle}>{webpartTitle}</div>
         <div className={classes.listSection}>
           {state.items.map((item) => (
-            <div className={`${styles.quicklinkSection} ${classes.itemDetail}`} key={item.ID}>
-              <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType} />
-              <Title url={item.Url} title={item.Title} />
+            <div className={`${styles.quicklinkSection} `} key={item.ID}>
+              <div className={currentIconCell}>
+                <div className={classes.itemDetail}>
+                  <Icon url={item.Url} icon={item.Icon} image={item.Image} wpimage={props.webpartImage} isdarkmode={props.isDarkTheme} webpartType={props.webpartType} />
+                  <Title url={item.Url} title={item.Title} />
+                </div>
+              </div>
             </div>
           ))}
         </div>
