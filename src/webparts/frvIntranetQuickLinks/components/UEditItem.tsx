@@ -36,7 +36,7 @@ export const editItem = async (props:Props, itemId:number, title:string, url:str
       },
       body: body
     });   
-
+    
     console.log(`Item edited`);
     setState({ status: 'successfully edited', items: [] });
     try {

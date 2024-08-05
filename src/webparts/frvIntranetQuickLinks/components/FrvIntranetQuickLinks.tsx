@@ -36,9 +36,12 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
   const {webpartTitle, isEditor,  pageFileName, webpartType } = props;
   const [isAddDialogOpen, setAddDialogIsOpen] = React.useState(false);
   const [isEditDialogOpen, setEditDialogIsOpen] = React.useState(false);
-  const [URLvalue, setURLValue] = React.useState("https://");
-  const [URLvalueError, setURLValueError] = React.useState("");
+
+  const [, setURLValue] = React.useState("https://");
+  const [URLvalueError,setURLValueError ] = React.useState("");
   const [itemID, setItemID] = React.useState<number | 0>(0);
+  const [, setItemTitle] = React.useState<string>("");
+  const [, setItemUrl] = React.useState<string>("");
   const classes = useStyles ();
 
   const handleOpenAddDialog = ():void => {
@@ -49,8 +52,10 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
     setURLValue ("https://");
   };
 
-  const handleOpenEditDialog = (itemID: number):void => {
-    setItemID(itemID);
+  const handleOpenEditDialog = (pitemID: number, pitemTitle: string, pitemUrl: string ):void => {
+    setItemID(pitemID);
+    setItemTitle(pitemTitle);
+    setItemUrl(pitemUrl);
     setEditDialogIsOpen(true);
   };
   const handleCloseEditDialog = ():void => {
@@ -63,12 +68,13 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
 
   const handleCreateItem = async (): Promise<void> => {
     const inputTitle = document.getElementById('inputTitle')as HTMLInputElement; 
+    const inputURL = document.getElementById('inputURL')as HTMLInputElement; 
     if (!inputTitle) {
       console.error('Input element "Title" not found');
       return;
     }  
     try {
-      await createItem(props, inputTitle.value , URLvalue, webpartType , pageFileName , webpartTitle, setAddDialogIsOpen, setState);
+      await createItem(props, inputTitle.value , inputURL.value , webpartType , pageFileName , webpartTitle, setAddDialogIsOpen, setState);
       setURLValue ("https://");
     } catch (error) {
       handleError(error);
@@ -85,14 +91,15 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
     }
   };
 
-  const handleEditItem = ( id: number): (() => Promise<void>) => async () => {
+  const handleEditItem = (): (() => Promise<void>) => async () => {
     const inputTitle = document.getElementById('inputTitle')as HTMLInputElement; 
+    const inputURL = document.getElementById('inputURL')as HTMLInputElement;
     if (!inputTitle) {
       console.error('Input element "Title" not found');
       return;
     }  
     try {
-      await editItem( props, id, inputTitle.value , URLvalue, webpartType , pageFileName , webpartTitle, setAddDialogIsOpen, setState );
+      await editItem( props, itemID , inputTitle.value , inputURL.value, webpartType , pageFileName , webpartTitle, setAddDialogIsOpen, setState );
     } catch (error) {
       handleError(error);
       console.log(`Error Edit item: ${error}`);
@@ -108,10 +115,14 @@ const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => 
     handleReadAllItems().catch(handleError);
   }, []);
 
-  const onChange: InputProps["onChange"] = (ev, data) => {
+  const onChangeTitle: InputProps["onChange"] = ( ev, data) => {
+    setItemTitle(data.value);
+  };
+
+  const onChangeURL: InputProps["onChange"] = ( ev, data) => {
     const isValid = data.value.search("https://");
     setURLValueError(isValid ? "Incorrect URL" : "");
-    setURLValue(data.value);
+    setItemUrl(data.value);
   };
 
  const currentTheme = props.isDarkTheme ? customQuickLinksTheme : customLightTheme;
@@ -156,8 +167,8 @@ const renderEditorView = (): JSX.Element => (
                 </div>
                 <div className={`${styles.itemAction} ${classes.itemAction}`}>
                   <Button size="large" className={classes.button}><ImageEditRegular /></Button>
-                  <Button size="large" className={classes.button} onClick={() => handleOpenEditDialog(item.ID)}><EditRegular /></Button>
-                  <Button size="large" className={classes.button} onClick={() => handleDeleteItem(item.ID)}><DeleteRegular /></Button>
+                  <Button size="large" className={classes.button} onClick={()=>handleOpenEditDialog(item.ID , item.Title, item.Url)}><EditRegular /></Button>
+                  <Button size="large" className={classes.button} onClick={handleDeleteItem(item.ID)}><DeleteRegular /></Button>
                 </div>
               </div>
             </div>
@@ -173,15 +184,15 @@ const renderEditorView = (): JSX.Element => (
               <DialogTitle className={classes.inputField}>Add Quick Link</DialogTitle>
               <DialogContent className={classes.dialogContent}>
                 <Field label="Title" hint="Enter display title" className={classes.inputField} />
-                <Input type="text" id="inputTitle" className={classes.inputField} />
+                <Input type="text" id="inputTitle"  className={classes.inputField} />
                 <Field label="URL" hint="Enter webpage or document's URL" className={classes.inputField} />
-                <Input type="url" id="inputUrl" onChange={onChange} value={URLvalue} className={classes.inputField} />
+                <Input type="url" id="inputUrl" onChange={onChangeURL}  className={classes.inputField} />
                 <Text>{URLvalueError}</Text>
               </DialogContent>
               <DialogActions>
                 <Button appearance="primary" onClick={handleCreateItem}>Add</Button>
                 <DialogTrigger disableButtonEnhancement>
-                  <Button onClick={()=>handleCancelItem()}>Cancel</Button>
+                  <Button onClick={handleCancelItem}>Cancel</Button>
                 </DialogTrigger>
               </DialogActions>
             </DialogBody>
@@ -193,13 +204,13 @@ const renderEditorView = (): JSX.Element => (
               <DialogTitle className={classes.inputField}>Edit Quick Link</DialogTitle>
               <DialogContent className={classes.dialogContent}>
                 <Field label="Title" hint="Enter display title" className={classes.inputField} />
-                <Input type="text" id="inputTitle" className={classes.inputField} />
+                <Input type="text" id="inputTitle" onChange={onChangeTitle} className={classes.inputField} />
                 <Field label="URL" hint="Enter webpage or document's URL" className={classes.inputField} />
-                <Input type="url" id="inputUrl" onChange={onChange} value={URLvalue} className={classes.inputField} />
+                <Input type="url" id="inputUrl" onChange={onChangeURL}  className={classes.inputField} />
                 <Text>{URLvalueError}</Text>
               </DialogContent>
               <DialogActions>
-                <Button appearance="primary" onClick={()=>handleEditItem(itemID)}>Update</Button>
+                <Button appearance="primary" onClick={handleEditItem()}>Update</Button>
                 <DialogTrigger disableButtonEnhancement>
                   <Button onClick={()=>handleCancelItem()}>Cancel</Button>
                 </DialogTrigger>
