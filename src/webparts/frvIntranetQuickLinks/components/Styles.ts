@@ -117,6 +117,7 @@ export const useStyles = makeStyles({
     paddingLeft: "10px",
     paddingRight: "10px",
     paddingBottom: "10px",
+    textDecoration: "none",
   },
 
   listSection :{
@@ -142,7 +143,13 @@ export const useStyles = makeStyles({
     paddingRight: "10px",
     paddingBottom: "5px",
   },
-
+  iconImageCompact:{
+    width:'100%',   
+    paddingTop: "10px", 
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    paddingBottom: "5px",
+  },
   iconImageDark:{
     width:'100%',  
     padding: "10px",
@@ -155,7 +162,15 @@ itemDetail:{
   alignContent: 'center',
   position: 'relative',
   maxWidth: '400px',  
+},
 
+itemDetailCompact:{
+  display: 'flex',
+  flexDirection: 'column',  
+  textAlign: 'center',
+  alignContent: 'center',
+  position: 'relative',
+  maxWidth: '80px',  
 },
 
 itemAction: {
