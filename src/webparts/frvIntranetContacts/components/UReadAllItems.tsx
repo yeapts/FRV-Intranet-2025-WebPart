@@ -10,6 +10,7 @@ const handleError = (error: Error): void => {
   interface Props {
     absoluteUrl: string;
     spHttpClient: SPHttpClient;
+    pageFileName:string;
   }
 
 export const readAllItems = async (props: Props, setState: React.Dispatch<React.SetStateAction<IState>>): Promise<void> => {

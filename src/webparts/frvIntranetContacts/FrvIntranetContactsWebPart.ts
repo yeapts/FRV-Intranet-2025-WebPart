@@ -25,6 +25,7 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
   private _isEditor: boolean = false;
+  private _pageFilename : string ='';
 
   //private _themeProvider: ThemeProvider;
  // private _themeVariant: IReadonlyTheme | undefined;
@@ -49,6 +50,7 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
         //appMode: this._appMode,
         context: this.context,
        // themeVariant: this._themeVariant,
+       pageFileName: this._pageFilename,
       }
     );
 
@@ -82,6 +84,13 @@ export default class FrvIntranetContactsWebPart extends BaseClientSideWebPart<IF
 
     // Register a handler to be notified if the theme variant changes
     //this._themeProvider.themeChangedEvent.add(this, this._handleThemeChangedEvent);
+
+    const { serverRequestPath } = this.context.pageContext.site;
+    const { serverRelativeUrl } = this.context.pageContext.web;    
+    this._pageFilename = serverRequestPath.toLowerCase()
+        .replace(serverRelativeUrl.toLowerCase(), "")
+        .replace("/sitepages/", "")
+        .replace("/pages/", "");
 
     return super.onInit();
   }

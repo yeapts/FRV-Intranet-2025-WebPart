@@ -6,6 +6,7 @@ import { readAllItems } from './UReadAllItems';
 interface Props {
   spHttpClient: SPHttpClient;
   absoluteUrl: string;
+  pageFileName: string;
 }
 
 const handleError = (error: Error): void => {  
@@ -36,6 +37,7 @@ export const createItem = async (props: Props, inputEmailValue: string, setAddDi
       'Title': "",
       'NameId': latestUserId,
       'Sort': 0,
+      'Page': props.pageFileName,
     }); 
 
     await props.spHttpClient.post(`${props.absoluteUrl}/_api/web/lists/getByTitle('Contacts')/items`, SPHttpClient.configurations.v1, {

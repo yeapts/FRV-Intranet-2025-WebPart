@@ -14,6 +14,7 @@ export interface IFrvIntranetContactsProps {
   userDisplayName: string;
   context: WebPartContext;
   instanceId: string;
+  pageFileName: string;
  // themeVariant: IReadonlyTheme | undefined;
  // appMode: AppMode;
 }

@@ -4,10 +4,11 @@ import { Item } from './IItem';
 interface Props {
   absoluteUrl: string;
   spHttpClient: SPHttpClient;
+  pageFileName: string;
 }
 
 export const getAllItems = async (props: Props): Promise<Item[]> => {
-  const endpoint = `${props.absoluteUrl}/_api/web/lists/GetByTitle('Contacts')/Items?$expand=Name&$select=Name/Title,Name/EMail,Name/Department,Name/JobTitle,Name/WorkPhone,Name/FirstName,Name/MobilePhone,Name/Modified,Name/Created,Name/LastName,ID,QuickDial,Title,Mobile,Phone,Sort,JobTitle&$orderby=Sort asc`;
+  const endpoint = `${props.absoluteUrl}/_api/web/lists/GetByTitle('Contacts')/Items?$expand=Name&$select=Name/Title,Name/EMail,Name/Department,Name/JobTitle,Name/WorkPhone,Name/FirstName,Name/MobilePhone,Name/Modified,Name/Created,Name/LastName,ID,QuickDial,Title,Mobile,Phone,Sort,JobTitle&$filter=(Page eq '${props.pageFileName}')&$orderby=Sort asc`;
 
   try {
     const response: SPHttpClientResponse = await props.spHttpClient.get(endpoint, SPHttpClient.configurations.v1);

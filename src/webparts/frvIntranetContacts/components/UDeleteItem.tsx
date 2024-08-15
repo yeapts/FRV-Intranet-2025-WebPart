@@ -6,6 +6,7 @@ import { IState } from './IState';
 interface Props {
   absoluteUrl: string;
   spHttpClient: SPHttpClient;
+  pageFileName:string;
 }
 
 const handleError = (error: Error): void => {  
