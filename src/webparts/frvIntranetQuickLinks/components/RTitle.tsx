@@ -1,6 +1,7 @@
 import { Text} from "@fluentui/react-components";
 import { useStyles } from './Styles';
 import * as React from "react";
+
 //import { customLightTheme } from "./Theme";
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
     if (title) {
       return (
         <div className={classes.iconCellTitle}>
-          <a href={url}>
+          <a href={url} >
             <Text align="center" size={200} weight="regular" truncate={true} className={classes.textStyle}  wrap={true}>{title}</Text> 
           </a> 
         </div>

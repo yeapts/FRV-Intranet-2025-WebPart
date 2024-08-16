@@ -1,5 +1,13 @@
 import { makeStyles, shorthands } from "@fluentui/react-components";
 
+const cellStyles = {
+  minWidth:"107px",
+  maxWidth: "114px",
+  minHeight: "114px",
+  borderRadius: "4px",
+  overflow: "hidden",  
+};
+
 export const useStyles = makeStyles({  
 
   webpartTitle:{
@@ -12,26 +20,19 @@ export const useStyles = makeStyles({
     display: "flex",
     maxWidth: "114px",
     minHeight: "114px",
-
   },
   iconRedCell:{
-    maxWidth: "114px",
-    minHeight: "114px",
-    overflow: "hidden",
-    borderRadius: '4px',
-    backgroundColor: '#D6001C',
-    display: 'flex',
-    flexDirection: 'column',  
+    ...cellStyles,    
+    display: "flex",
+    flexDirection: 'column',
     position: 'relative',
+    backgroundColor: '#D6001C',
     '&:hover': {
       backgroundColor: '#D6001Cde',
     },
   },
   iconBlueCell:{
-    maxWidth: "114px",
-    minHeight: "114px",
-    overflow: "hidden",
-    borderRadius: '4px',
+    ...cellStyles, 
     backgroundColor: '#0c2340',
     display: 'flex',
     flexDirection: 'column',  
@@ -41,10 +42,7 @@ export const useStyles = makeStyles({
     },
   },
   iconCellDark:{
-    maxWidth: "114px",
-    minHeight: "114px",
-    overflow: "hidden",
-    borderRadius: '4px',
+    ...cellStyles, 
     backgroundColor: '#3A597F',
     display: 'flex',
     flexDirection: 'column',  
@@ -54,10 +52,7 @@ export const useStyles = makeStyles({
     },
   },
   iconYellowCell:{
-    maxWidth: "114px",
-    minHeight: "114px",
-    overflow: "hidden",
-    borderRadius: '4px',
+    ...cellStyles, 
     backgroundColor: '#FFC845',
     display: 'flex',
     flexDirection: 'column',  
@@ -67,10 +62,7 @@ export const useStyles = makeStyles({
     },
   },
   iconOrangeCell:{
-    maxWidth: "114px",
-    minHeight: "114px",
-    overflow: "hidden",
-    borderRadius: '4px',
+    ...cellStyles, 
     backgroundColor: '#FF7500',
     display: 'flex',
     flexDirection: 'column',  
@@ -80,10 +72,7 @@ export const useStyles = makeStyles({
     },
   },
   iconGreenCell:{
-    maxWidth: "114px",
-    minHeight: "114px",
-    overflow: "hidden",
-    borderRadius: '4px',
+    ...cellStyles, 
     backgroundColor: '#1a6d09',
     display: 'flex',
     flexDirection: 'column',  
@@ -93,10 +82,7 @@ export const useStyles = makeStyles({
     },
   },
   iconGrayCell:{
-    maxWidth: "114px",
-    minHeight: "114px",
-    overflow: "hidden",
-    borderRadius: '4px',
+    ...cellStyles, 
     backgroundColor: '#818181',
     display: 'flex',
     flexDirection: 'column',  

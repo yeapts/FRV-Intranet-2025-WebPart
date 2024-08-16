@@ -1,5 +1,9 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
+* {
+  box-sizing: border-box;
+}
+
 .frvIntranet2025WebPart {
   overflow: hidden;
   padding: 1em;

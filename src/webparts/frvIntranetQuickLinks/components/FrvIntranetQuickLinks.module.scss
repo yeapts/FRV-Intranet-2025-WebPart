@@ -1,5 +1,15 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
+/* Apply border-box to all elements for consistent layout calculations */
+* {
+  box-sizing: border-box;
+}
+
+/* Remove underline from text links */
+a {
+  text-decoration: none;
+}
+
 .frvIntranetQuickLinks {
   overflow: hidden;
   padding: 1em;
