@@ -17,6 +17,8 @@ import { editItemImage } from './UEditItemImage';
 import { readAllIcons } from './UReadAllIcons';
 import IconCompact from './RIconCompact';
 
+import TileDisplay from '../../../components/Container/TileDisplay/TileDisplay';
+
 const handleError = (error: Error): void => {  
   console.error(error);  // Log the error or send it to an error reporting service here
 }; 
@@ -225,6 +227,7 @@ const renderEditorView = (): JSX.Element => (
             </div>
           ))}
         </div>
+        <TileDisplay siteUrl={props.absoluteUrl} listName={'QuickLinks'}  />
       </FluentProvider>
     </IdPrefixProvider>
     <IdPrefixProvider value={`frv-quicklink-dialog-${props.instanceId}-`}>
