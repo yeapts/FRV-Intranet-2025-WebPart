@@ -54,6 +54,7 @@ export default class FrvIntranetQuickLinksWebPart extends BaseClientSideWebPart<
     );
 
     ReactDom.render(element, this.domElement);
+
   }
 
   private checkEditorPermission = ():boolean => {
@@ -64,8 +65,12 @@ export default class FrvIntranetQuickLinksWebPart extends BaseClientSideWebPart<
   }
 
   protected onInit(): Promise<void> {
-    // Set the CSS property for the web part width
-    this.domElement.style.setProperty('--webpartWidth', String(this.width) + "px" || null);
+
+    const webpartItemMaximumWidth = 114;
+    const columns = Math.floor(this.width / webpartItemMaximumWidth);
+    const webpartItemGap = (columns - 1) * 10 / columns;
+    const webpartItemWidth = this.width / columns - webpartItemGap;
+    this.domElement.style.setProperty('--webpartItemWidth', `${webpartItemWidth}px`);
 
     const { serverRequestPath } = this.context.pageContext.site;
     const { serverRelativeUrl } = this.context.pageContext.web;    
@@ -78,6 +83,7 @@ export default class FrvIntranetQuickLinksWebPart extends BaseClientSideWebPart<
     //  this._environmentMessage = message;
     // });
     this._webpartWidth = this.width;
+
     return super.onInit();
   }
 
@@ -102,8 +108,13 @@ export default class FrvIntranetQuickLinksWebPart extends BaseClientSideWebPart<
   }
 
   protected onAfterResize(newWidth: number):void {
-    console.log("New web part width: " + newWidth);
-    this.domElement.style.setProperty('--webpartWidth', String(this.width)+"px"  || null);
+
+    const webpartItemMaximumWidth = 114;
+    const columns = Math.floor(newWidth/ webpartItemMaximumWidth);
+    const webpartItemGap = (columns - 1) * 10 / columns;
+    const webpartItemWidth = newWidth / columns - webpartItemGap;
+    this.domElement.style.setProperty('--webpartItemWidth', `${webpartItemWidth}px`);
+
     this._webpartWidth = newWidth;
   }
 

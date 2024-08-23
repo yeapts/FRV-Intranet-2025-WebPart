@@ -1,4 +1,4 @@
-export interface Item {
+export interface QuicklinkItem {
     Sort: number;
     ID: number;
     Title: string;

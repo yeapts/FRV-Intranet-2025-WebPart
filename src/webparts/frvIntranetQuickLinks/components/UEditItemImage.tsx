@@ -1,5 +1,5 @@
 import { SPHttpClient } from '@microsoft/sp-http';
-import { IState } from './IState';
+import { QuicklinkState } from  '../../../models/QuicklinkState';
 import { readAllItems } from './UReadAllItems';
 
 interface Props {
@@ -14,7 +14,7 @@ const handleError = (error: Error): void => {
   console.error(error);  // Log the error or send it to an error reporting service here
 };
 
-export const editItemImage = async (props:Props, itemId:number, url:string, setEditImageDialogIsOpen:React.Dispatch<React.SetStateAction<boolean>>, setState: React.Dispatch<React.SetStateAction<IState>>): Promise<void> => {
+export const editItemImage = async (props:Props, itemId:number, url:string, setEditImageDialogIsOpen:React.Dispatch<React.SetStateAction<boolean>>, setState: React.Dispatch<React.SetStateAction<QuicklinkState>>): Promise<void> => {
   try {
   
     const body: string = JSON.stringify({  

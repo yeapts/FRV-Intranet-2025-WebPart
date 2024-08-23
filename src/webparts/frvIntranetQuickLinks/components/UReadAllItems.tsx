@@ -1,7 +1,7 @@
 // ReadAllItems.ts
 import { SPHttpClient } from '@microsoft/sp-http';
 import { getAllItems } from './UGetAllItems'; // Import the getAllItems function from the API file
-import { IState } from './IState';
+import { QuicklinkState } from  '../../../models/QuicklinkState';
 
 const handleError = (error: Error): void => {  
     console.error(error);  // Log the error or send it to an error reporting service here
@@ -15,7 +15,7 @@ const handleError = (error: Error): void => {
     webpartType: string;
   }
 
-export const readAllItems = async (props: Props, setState: React.Dispatch<React.SetStateAction<IState>>): Promise<void> => {
+export const readAllItems = async (props: Props, setState: React.Dispatch<React.SetStateAction<QuicklinkState>>): Promise<void> => {
   try {
     setState({ status: 'Loading all items...', items: [] });
     const items = await getAllItems(props);

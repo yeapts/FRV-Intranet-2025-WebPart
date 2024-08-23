@@ -1,10 +1,10 @@
 // ReadAllItems.ts
 import { SPHttpClient } from '@microsoft/sp-http';
 import { getAllIcons } from './UGetAllIcons'; // Import the getAllItems function from the API file
-import { Icon } from './IIcon';
+import { IconItem } from  '../../../models/IconItem';
 
 export interface IIconState {
-  icons: Icon[];
+  icons: IconItem[];
   status: string;
 }
 

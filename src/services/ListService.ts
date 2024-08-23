@@ -1,8 +1,15 @@
 import { ListItem } from "../models/ListItem";
 
-export const getItems = async (siteUrl: string, listName: string): Promise<ListItem[]> => {
+export const getItems = async (siteUrl: string, listName: string, orderBy: string = 'ID desc', filter?: string): Promise<ListItem[]> => {
   try {
-    const response = await fetch(`${siteUrl}/_api/web/lists/getByTitle('${listName}')/items`, {
+
+    let query = `${siteUrl}/_api/web/lists/getByTitle('${listName}')/items?$orderby=${orderBy}`;
+
+    if (filter) {
+      query += `&$filter=${filter}`;
+    }
+
+    const response = await fetch(query, {
       method: 'GET',
       headers: {
         'Accept': 'application/json;odata=verbose',

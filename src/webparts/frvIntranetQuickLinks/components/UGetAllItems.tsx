@@ -1,5 +1,5 @@
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
-import { Item } from './IItem';
+import { QuicklinkItem } from '../../../models/QuicklinkItem';
 
 interface Props {
   absoluteUrl: string;
@@ -9,7 +9,7 @@ interface Props {
   webpartType: string;
 }
 
-export const getAllItems = async (props: Props): Promise<Item[]> => {
+export const getAllItems = async (props: Props): Promise<QuicklinkItem[]> => {
   const endpoint = `${props.absoluteUrl}/_api/web/lists/GetByTitle('QuickLinks')/Items?$select=ID,Title,Sort,Url,Section,Image,Webpart,Page,Icon&$orderby=Sort asc&$filter=Section eq '${props.webpartTitle}'`;
 
   try {

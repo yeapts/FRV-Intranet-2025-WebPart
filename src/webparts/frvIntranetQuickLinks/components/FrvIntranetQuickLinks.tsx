@@ -2,8 +2,8 @@ import * as React from 'react';
 import styles from './FrvIntranetQuickLinks.module.scss';
 import type { IFrvIntranetQuickLinksProps } from './IFrvIntranetQuickLinksProps';
 import { useStyles } from './Styles';
-import { IState } from './IState'; 
-import { IIconState } from './IIconState'; 
+import { QuicklinkState } from  '../../../models/QuicklinkState';
+import { IconState } from  '../../../models/IconState';
 import { readAllItems } from './UReadAllItems';
 import { customLightTheme } from '../../frvIntranet2025WebPart/components/Theme';
 import { Text, Button, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger, Field, FluentProvider, IdPrefixProvider, Input, InputProps, Theme, webDarkTheme } from '@fluentui/react-components';
@@ -38,8 +38,8 @@ const customQuickLinksTheme: Theme = {
 };  
 
 const FrvIntranetQuickLinks: React.FC<IFrvIntranetQuickLinksProps> = (props) => {
-  const [state, setState] = React.useState<IState>({ items: [], status: '', });
-  const [iconState, setIconState] = React.useState<IIconState>({ icons: [], status: '', });
+  const [state, setState] = React.useState<QuicklinkState>({ items: [], status: '', });
+  const [iconState, setIconState] = React.useState<IconState>({ icons: [], status: '', });
   const {webpartTitle, isEditor,  pageFileName, webpartType } = props;
   const [isAddDialogOpen, setAddDialogIsOpen] = React.useState(false);
   const [isEditDialogOpen, setEditDialogIsOpen] = React.useState(false);

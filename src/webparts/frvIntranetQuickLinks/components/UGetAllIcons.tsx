@@ -1,12 +1,12 @@
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
-import { Icon } from './IIcon';
+import { IconItem } from  '../../../models/IconItem';
 
 interface Props {
   absoluteUrl: string;
   spHttpClient: SPHttpClient;
 }
 
-export const getAllIcons = async (props: Props): Promise<Icon[]> => {
+export const getAllIcons = async (props: Props): Promise<IconItem[]> => {
   const endpoint = `https://firerescuevictoria.sharepoint.com/_api/web/lists/GetByTitle('Icons')/Items?$select=ID,Title,FileRef&$orderby=Title asc`;
 
   try {

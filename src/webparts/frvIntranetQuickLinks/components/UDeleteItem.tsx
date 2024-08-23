@@ -1,7 +1,7 @@
 
 import { SPHttpClient } from '@microsoft/sp-http';
 import { readAllItems } from './UReadAllItems';
-import { IState } from './IState';
+import { QuicklinkState } from  '../../../models/QuicklinkState';
 
 interface Props {
   absoluteUrl: string;
@@ -15,12 +15,12 @@ const handleError = (error: Error): void => {
     console.error(error);  // Log the error or send it to an error reporting service here
   };
 
-  const handleReadAllItems = async (props: Props, setState: React.Dispatch<React.SetStateAction<IState>>): Promise<void> => {
+  const handleReadAllItems = async (props: Props, setState: React.Dispatch<React.SetStateAction<QuicklinkState>>): Promise<void> => {
     await readAllItems(props, setState);
   };
   
 
-const DeleteItem = async (props: Props, setState: React.Dispatch<React.SetStateAction<IState>>, itemId: number): Promise<void> => {
+const DeleteItem = async (props: Props, setState: React.Dispatch<React.SetStateAction<QuicklinkState>>, itemId: number): Promise<void> => {
   try {
     console.log(`Deleting... ${itemId}`);
     await props.spHttpClient.post(
